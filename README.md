@@ -5,7 +5,7 @@ After having cloned the repository to your disk you have to follow these few ste
 
 1. Open up Eclipse.
 2. Create a new java project and select the folder containing this seed.
-2. Go to Project --> Properties in the menu bar.
+2. Go to Project Menu  --> Properties in the menu bar.
 3. Click on Java Build Path.
 4. click the Add Jar button.
 5. Select the *lib* folder in your project.
@@ -17,4 +17,3 @@ After having cloned the repository to your disk you have to follow these few ste
 11. Select your operating system and click OK until you get back to the default eclipse window.
 12. Press play to check it it works.
 13. Now, you can start making your own game.
-14.ZZZZ
