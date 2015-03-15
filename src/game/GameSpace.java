@@ -33,7 +33,8 @@ public class GameSpace extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-	g.drawRect(10 ,20 , 50 , 50 );	
+	Brick bricks = new Brick(3 , 10 ,20 );
+	g.drawRect(bricks.X() ,bricks.Y() , bricks.Length() , bricks.Width() );	
 	}
 
 	//Main method
