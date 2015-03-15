@@ -9,11 +9,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 //Package "Basic Game" for 2D game development
 
-//Main script 
+
+
 public class GameSpace extends BasicGame
 {
-	Ball NewBall;
 
+	//Global variables
+	Brick [] bricks = new Brick[10];
+	Ball NewBall;
+	
 	public GameSpace(String gameName)
 	{
 		super(gameName);
@@ -23,8 +27,9 @@ public class GameSpace extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		NewBall = new Ball(100,100);
-		
-		
+
+		bricks[0]= new Brick(2, 400, 400);
+		bricks[1]= new Brick(2, 500, 500);
 	}
 
 	@Override
@@ -37,27 +42,30 @@ public class GameSpace extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-	Brick bricks = new Brick(3 , 10 ,20 );
-	
-	g.drawRect(bricks.X() ,bricks.Y() , bricks.Length() , bricks.Width() );	
 	g.drawOval(NewBall.GetX(), NewBall.GetY(), 20,20);
 	NewBall.MoveBall();
 	 
+       for(int i = 0 ; i<bricks.length; i++){
+	       g.drawRect(bricks[i].X() ,bricks[i].Y() , bricks[i].Length() , bricks[i].Width() );	
+       }
 	}
-
+	
+	
 	//Main method
-	public static void main(String[] args)
-	{
-		try
+		public static void main(String[] args)
 		{
-			AppGameContainer appgc;
-			appgc = new AppGameContainer(new GameSpace("Breakout"));
-			appgc.setDisplayMode(1280, 720, false);
-			appgc.start();
+			try
+			{
+				AppGameContainer appgc;
+				appgc = new AppGameContainer(new GameSpace("Breakout"));
+				appgc.setDisplayMode(1280, 720, false);
+				appgc.start();
+			}
+			catch (SlickException ex)
+			{
+				Logger.getLogger(GameSpace.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
-		catch (SlickException ex)
-		{
-			Logger.getLogger(GameSpace.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
+
+	
 }
