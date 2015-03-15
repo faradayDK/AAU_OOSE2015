@@ -36,7 +36,7 @@ public class GameSpace extends BasicGame
 	Brick [] bricks = new Brick[2];
 	bricks[0]= new Brick(2, 400, 400);
 	bricks[1]= new Brick(2, 500, 500);
-    for(int i = 0 ; i<2; i++){
+    for(int i = 0 ; i<bricks.length; i++){
 	g.drawRect(bricks[i].X() ,bricks[i].Y() , bricks[i].Length() , bricks[i].Width() );	
     }
 	
