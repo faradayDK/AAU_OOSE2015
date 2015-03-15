@@ -15,7 +15,7 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables
-	Brick [] bricks = new Brick[10];
+	Brick [] bricks = new Brick[2];
 	Ball NewBall;
 	
 	public GameSpace(String gameName)
