@@ -12,6 +12,7 @@ import org.newdawn.slick.SlickException;
 //Main script 
 public class GameSpace extends BasicGame
 {
+	Ball NewBall;
 
 	public GameSpace(String gameName)
 	{
@@ -21,12 +22,15 @@ public class GameSpace extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException
 	{
+		NewBall = new Ball(100,100);
+		
 		
 	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException 
 	{
+	
 		
 	}
 
@@ -34,7 +38,11 @@ public class GameSpace extends BasicGame
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
 	Brick bricks = new Brick(3 , 10 ,20 );
+	
 	g.drawRect(bricks.X() ,bricks.Y() , bricks.Length() , bricks.Width() );	
+	g.drawOval(NewBall.GetX(), NewBall.GetY(), 20,20);
+	NewBall.MoveBall();
+	 
 	}
 
 	//Main method
