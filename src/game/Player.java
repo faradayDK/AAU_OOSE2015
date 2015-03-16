@@ -23,12 +23,12 @@ public class Player {
 	}
 	
 	public void moveLeft() {
-	    position+=speed; 
+	    position-=speed; 
 	    speed =speed+1;
 
 	}
 	public void moveRight(){
-	    position-=speed;
+	    position+=speed;
 	    speed = speed+1;
 	}
 	public void resetSpeed(){

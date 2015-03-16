@@ -49,22 +49,48 @@ public class GameSpace extends BasicGame
 		Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_LEFT))
         {
-        	player.moveRight();
+        	player.moveLeft();
         }
       
        
         else if (input.isKeyDown(Input.KEY_RIGHT))
         {
-        	player.moveLeft();
+        	player.moveRight();
         }
         
         else 
         	player.resetSpeed();
     
         
-        if(ball.GetY()> 625.0f ){
+        if(ball.GetY()> 600.0f && ball.GetY()<610.0f){
         	if(ball.GetX()> player.position && ball.GetX() <player.position+100 ){
         		ball.fliesDown = false;
+        		if (input.isKeyDown(Input.KEY_LEFT)){
+        			if(ball.fliesRight ==true){
+        				ball.angleRatio = ball.angleRatio-player.speed/50;
+        				if( (ball.angleRatio-player.speed/50)<0){
+        					ball.fliesRight =false;
+        				}
+        			}
+        			else{
+        				ball.angleRatio = ball.angleRatio+player.speed/50;
+        			}
+        		
+        		}
+        		if (input.isKeyDown(Input.KEY_RIGHT)){
+        			if(ball.fliesRight ==true){
+        				ball.angleRatio = ball.angleRatio+player.speed/50;
+        				
+        			}
+        			else{
+        				ball.angleRatio = ball.angleRatio-player.speed/50;
+        				if((ball.angleRatio-player.speed/50)<0){
+        					
+        				}
+        			}
+        		
+        		}
+        	
         	}
         }
 		
