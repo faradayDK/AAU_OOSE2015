@@ -6,6 +6,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 //Package "Basic Game" for 2D game development
 
@@ -15,7 +16,7 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables
-	Brick [] bricks = new Brick[10];
+	Brick [] bricks = new Brick[2];
 	Ball NewBall;
 	
 	public GameSpace(String gameName)
@@ -27,28 +28,35 @@ public class GameSpace extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		NewBall = new Ball(100,100);
+		
+		//create grid of bricks
+		
 
-		bricks[0]= new Brick(2, 400, 400);
-		bricks[1]= new Brick(2, 500, 500);
 	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException 
 	{
-	
+		Input input = gc.getInput();
+        if (input.isKeyDown(Input.KEY_UP))
+        {
+        	NewBall.MoveBall();
+        }
 		
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
+	
+    for(int i = 0 ; i<bricks.length; i++)
+	//g.drawRect(bricks[i].X() ,bricks[i].Y() , bricks[i].Length() , bricks[i].Width() );	
+	
 	g.drawOval(NewBall.GetX(), NewBall.GetY(), 20,20);
-	NewBall.MoveBall();
-	 
-       for(int i = 0 ; i<bricks.length; i++){
-	       g.drawRect(bricks[i].X() ,bricks[i].Y() , bricks[i].Length() , bricks[i].Width() );	
-       }
+
+    
 	}
+	
 	
 	
 	//Main method
