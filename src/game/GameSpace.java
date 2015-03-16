@@ -29,7 +29,7 @@ public class GameSpace extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		ball = new Ball(100,100);
-		player = new Player(1, 600, 4 , 1);
+		player = new Player(1, 500, 4 , 1);
 		
 		//create grid of bricks
 		
@@ -42,11 +42,23 @@ public class GameSpace extends BasicGame
 		Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_LEFT))
         {
+        	player.moveRight();
+        }
+      
+       
+        else if (input.isKeyDown(Input.KEY_RIGHT))
+        {
         	player.moveLeft();
         }
-        if (input.isKeyDown(Input.KEY_RIGHT))
-        {
-        	player.moveRight();
+        
+        else 
+        	player.resetSpeed();
+    
+        
+        if(ball.GetY()> 625.0f ){
+        	if(ball.GetX()> player.position && ball.GetX() <player.position+100 ){
+        		ball.fliesDown = false;
+        	}
         }
 		
 	}
@@ -54,11 +66,14 @@ public class GameSpace extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
+		ball.MoveBall();
 	
     for(int i = 0 ; i<bricks.length; i++)
 	//g.drawRect(bricks[i].X() ,bricks[i].Y() , bricks[i].Length() , bricks[i].Width() );	
-	g.drawRect(player.position, 500, 50 , 25);
+	g.drawRect(player.position, 650, 100 , 25);
 	g.drawOval(ball.GetX(), ball.GetY(), 20,20);
+	
+	
 
     
 	}

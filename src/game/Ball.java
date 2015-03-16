@@ -1,26 +1,26 @@
 package game;
 
 public class Ball {
-	public int x,y;
+	public float x,y;
 	private boolean fliesRight = true;
-	private boolean fliesDown  = true;
+	public boolean fliesDown  = true;
 	
 
 	public Ball( int x, int y){
 		this.x = x;
 		this.y = y;
 	}
-	public int GetX(){
+	public float GetX(){
 		return  this.x;
 	}
-	public int GetY(){
+	public float GetY(){
 		return this.y;
 	}
 	public void MoveBall(){
 		
 		if (fliesRight == true){
 			if(this.x<1280){
-				this.x = this.x+1;
+				this.x = this.x+0.6f;
 			}
 			else{
 				fliesRight = false;
@@ -28,7 +28,7 @@ public class Ball {
 		}
 		if (fliesRight == false){
 			if(this.x>0){
-				this.x = this.x-1;
+				this.x = this.x-0.6f;
 			}
 			else{
 				fliesRight = true;
@@ -37,7 +37,7 @@ public class Ball {
 		}
 		if (fliesDown == true){
 			if(this.y<720){
-				this.y = this.y+1;
+				this.y = this.y+0.6f;
 			}
 			else {
 				fliesDown = false;
@@ -45,7 +45,7 @@ public class Ball {
 		}
 		if(fliesDown ==false){
 			if(this.y>0){
-				this.y = this.y-1;
+				this.y = this.y-0.6f;
 			}
 			else{
 				fliesDown = true;

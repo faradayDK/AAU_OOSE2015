@@ -4,9 +4,10 @@ import java.awt.event.KeyEvent;
 
 public class Player {
 	public float position;
-	private int speed;
+	public int speed;
 	private int length;
 	private int color;
+	private int speedConstant;
 	
 	
 	public Player(int speed, float position, int length, int color) {
@@ -15,16 +16,23 @@ public class Player {
 		this.position = position;
 		this.length = length;
 		this.color = color;
+		this.speedConstant = speed;
 	
 	}
 	
 	public void moveLeft() {
+		
 
-	     position+=speed; 
+	    position+=speed; 
+	    speed =speed+1;
 	     
 	}
 	public void moveRight(){
 
-	     position-=speed;
+	    position-=speed;
+	    speed = speed+1;
+	}
+	public void resetSpeed(){
+		speed = speedConstant;
 	}
 }
