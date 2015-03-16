@@ -28,7 +28,7 @@ public class Ball {
 			}
 		}
 		if (fliesRight == false){
-			if(this.x>0){
+			if(this.x>0.0f){
 				this.x = this.x-angleRatio;
 			}
 			else{
@@ -37,8 +37,8 @@ public class Ball {
 			
 		}
 		if (fliesDown == true){
-			if(this.y<720){
-				this.y = this.y+0.2f;
+			if(this.y<720.0f){
+				this.y = this.y+0.4f;
 			}
 			else {
 				fliesDown = false;
@@ -46,7 +46,7 @@ public class Ball {
 		}
 		if(fliesDown ==false){
 			if(this.y>0){
-				this.y = this.y-0.2f;
+				this.y = this.y-0.4f;
 			}
 			else{
 				fliesDown = true;

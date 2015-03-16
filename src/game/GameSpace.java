@@ -67,10 +67,12 @@ public class GameSpace extends BasicGame
         		ball.fliesDown = false;
         		if (input.isKeyDown(Input.KEY_LEFT)){
         			if(ball.fliesRight ==true){
-        				ball.angleRatio = ball.angleRatio-player.speed/50;
+        				
+        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/50);
         				if( (ball.angleRatio-player.speed/50)<0){
         					ball.fliesRight =false;
         				}
+        				
         			}
         			else{
         				ball.angleRatio = ball.angleRatio+player.speed/50;
@@ -83,10 +85,11 @@ public class GameSpace extends BasicGame
         				
         			}
         			else{
-        				ball.angleRatio = ball.angleRatio-player.speed/50;
+        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/50);
         				if((ball.angleRatio-player.speed/50)<0){
-        					
+        					ball.fliesRight = true;
         				}
+
         			}
         		
         		}
