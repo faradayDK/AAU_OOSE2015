@@ -10,15 +10,18 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 //Package "Basic Game" for 2D game development
 
-
-
 public class GameSpace extends BasicGame
 {
 
 	//Global variables
-	Brick [] bricks = new Brick[2];
-	Ball ball;
-	Player player;
+	public Brick [] bricks = new Brick[20];
+	public Ball ball;
+	public Player player;
+	
+	//Setup for the screen size
+	public static int spaceWidth = 720;
+	public static int spaceLength = 1280;
+	
 	
 	public GameSpace(String gameName)
 	{
@@ -29,16 +32,20 @@ public class GameSpace extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		ball = new Ball(100,100);
-		player = new Player(1, 500, 4 , 1);
-		
+		player = new Player(0.5f , (int)(spaceLength /2) , 120 , 20 , 1);
+
 		//create grid of bricks
-		
+		for (int i = 0; i< bricks.length; i++ )
+		{
+			bricks[i] = new Brick(1, i * 100, 100);
+		}
 
 	}
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException 
 	{
+		//Player control
 		Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_LEFT))
         {
@@ -69,8 +76,9 @@ public class GameSpace extends BasicGame
 		ball.MoveBall();
 	
     for(int i = 0 ; i<bricks.length; i++)
-	//g.drawRect(bricks[i].X() ,bricks[i].Y() , bricks[i].Length() , bricks[i].Width() );	
-	g.drawRect(player.position, 650, 100 , 25);
+	g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetLength() , bricks[i].GetWidth() );	
+   
+	g.drawRect(player.position , spaceWidth - 100, player.length , player.width);
 	g.drawOval(ball.GetX(), ball.GetY(), 20,20);
 	
 	
@@ -78,16 +86,14 @@ public class GameSpace extends BasicGame
     
 	}
 	
-	
-	
 	//Main method
-		public static void main(String[] args)
+	public static void main(String[] args)
 		{
 			try
 			{
 				AppGameContainer appgc;
 				appgc = new AppGameContainer(new GameSpace("Breakout"));
-				appgc.setDisplayMode(1280, 720, false);
+				appgc.setDisplayMode(spaceLength, spaceWidth , false);
 				appgc.start();
 			}
 			catch (SlickException ex)
