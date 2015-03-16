@@ -1,19 +1,14 @@
 package game;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-
-public class Brick {
+public class Brick 
+{
     
 	//
 	private int type = 0;
 	private int lives = 3;
 	private float x, y = 0;
 	private float length = 100;
-	private float width = 15;
+	private float width = 25;
 	
 	/**
 	 * Create a brick
@@ -29,39 +24,54 @@ public class Brick {
 		this.x = x;
 		this.y = y;
 	}
+	
 	/**
 	 * Get X-value (Top-right corner)
 	 * Returns the float
 	 */
-	public float X (){
+	public float GetX ()
+	{
 		return this.x;
 	}
 	/**
 	 * Get Y-value (Top-right corner)
 	 * Returns the float
 	 */
-	public float Y(){
+	public float GetY()
+	{
 		return this.y;
 	}
 	/**
 	 * Get the length of the brick
 	 * Returns the float
 	 */
-	public float Length(){
+	public float GetLength()
+	{
 		return this.length;
 	}
 	/**
 	 * Get the width of the brick
 	 * Returns the float
 	 */
-	public float Width(){
+	public float GetWidth()
+	{
 		return this.width;
 	}
 	/**
 	 * Get the type
 	 * Returns the int
 	 */
-	public int Type(){
+	public int GetType()
+	{
 		return this.type;
+	}
+	
+	public int GetLife()
+	{
+		return this.lives;
+	}
+	
+	public void ReduceLife(){
+		this.lives --;
 	}
 }
