@@ -3,7 +3,7 @@ package game;
 import java.awt.event.KeyEvent;
 
 public class Player {
-	private float position;
+	public float position;
 	private int speed;
 	private int length;
 	private int color;
@@ -18,12 +18,13 @@ public class Player {
 	
 	}
 	
-	public void move(KeyEvent e) {
-	if ( e.getKeyCode() == KeyEvent.VK_LEFT){
+	public void moveLeft() {
+
 	     position+=speed; 
+	     
 	}
-	if ( e.getKeyCode() == KeyEvent.VK_RIGHT){
+	public void moveRight(){
+
 	     position-=speed;
-	}
 	}
 }

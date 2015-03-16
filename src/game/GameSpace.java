@@ -17,7 +17,8 @@ public class GameSpace extends BasicGame
 
 	//Global variables
 	Brick [] bricks = new Brick[2];
-	Ball NewBall;
+	Ball ball;
+	Player player;
 	
 	public GameSpace(String gameName)
 	{
@@ -27,7 +28,8 @@ public class GameSpace extends BasicGame
 	@Override
 	public void init(GameContainer gc) throws SlickException
 	{
-		NewBall = new Ball(100,100);
+		ball = new Ball(100,100);
+		player = new Player(1, 600, 4 , 1);
 		
 		//create grid of bricks
 		
@@ -38,9 +40,13 @@ public class GameSpace extends BasicGame
 	public void update(GameContainer gc, int i) throws SlickException 
 	{
 		Input input = gc.getInput();
-        if (input.isKeyDown(Input.KEY_UP))
+        if (input.isKeyDown(Input.KEY_LEFT))
         {
-        	NewBall.MoveBall();
+        	player.moveLeft();
+        }
+        if (input.isKeyDown(Input.KEY_RIGHT))
+        {
+        	player.moveRight();
         }
 		
 	}
@@ -51,8 +57,8 @@ public class GameSpace extends BasicGame
 	
     for(int i = 0 ; i<bricks.length; i++)
 	//g.drawRect(bricks[i].X() ,bricks[i].Y() , bricks[i].Length() , bricks[i].Width() );	
-	
-	g.drawOval(NewBall.GetX(), NewBall.GetY(), 20,20);
+	g.drawRect(player.position, 500, 50 , 25);
+	g.drawOval(ball.GetX(), ball.GetY(), 20,20);
 
     
 	}
