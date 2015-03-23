@@ -32,12 +32,13 @@ public class GameSpace extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		ball = new Ball(100,100);
-		player = new Player(0.5f , (int)(spaceLength /2) , 120 , 20 , 1);
+		player = new Player(0.5f , (int)(spaceLength /2) , 120 , 20);
 
 		//create grid of bricks
-		for (int i = 0; i< bricks.length; i++ )
+		for (int x = 0; x< bricks.length; x++ )
 		{
-			bricks[i] = new Brick(1, i * 100, 100);
+			//for (int y = 0 ; )
+			//bricks[x] = new Brick(1, x * 100, 100);
 		}
 
 	}
