@@ -2,8 +2,9 @@ package game;
 
 public class Ball {
 	public float x,y;
-	private boolean fliesRight = true;
+	public boolean fliesRight = true;
 	public boolean fliesDown  = true;
+	public float angleRatio = 0.2f;
 	
 
 	public Ball( int x, int y){
@@ -20,15 +21,15 @@ public class Ball {
 		
 		if (fliesRight == true){
 			if(this.x<1280){
-				this.x = this.x+0.6f;
+				this.x = this.x+ angleRatio;
 			}
 			else{
 				fliesRight = false;
 			}
 		}
 		if (fliesRight == false){
-			if(this.x>0){
-				this.x = this.x-0.6f;
+			if(this.x>0.0f){
+				this.x = this.x-angleRatio;
 			}
 			else{
 				fliesRight = true;
@@ -36,8 +37,8 @@ public class Ball {
 			
 		}
 		if (fliesDown == true){
-			if(this.y<720){
-				this.y = this.y+0.6f;
+			if(this.y<720.0f){
+				this.y = this.y+0.4f;
 			}
 			else {
 				fliesDown = false;
@@ -45,7 +46,7 @@ public class Ball {
 		}
 		if(fliesDown ==false){
 			if(this.y>0){
-				this.y = this.y-0.6f;
+				this.y = this.y-0.4f;
 			}
 			else{
 				fliesDown = true;
