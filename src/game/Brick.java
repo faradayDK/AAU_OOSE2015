@@ -6,9 +6,10 @@ public class Brick
 	//
 	private int type = 0;
 	private int lives = 3;
-	private float x, y = 0;
-	private float length = 100;
-	private float width = 25;
+	private float x, y ;
+	private float width = 100;
+	private float height = 25;
+	private boolean destroyed;
 	
 	/**
 	 * Create a brick
@@ -21,8 +22,10 @@ public class Brick
 		this.type = type;
 		if(type == 1 || type == 2 || type == 3)
 			lives = type;
+		//else if (type == 4)
 		this.x = x;
 		this.y = y;
+		this.destroyed = false;
 	}
 	
 	/**
@@ -45,9 +48,9 @@ public class Brick
 	 * Get the length of the brick
 	 * Returns the float
 	 */
-	public float GetLength()
+	public float GetHeight()
 	{
-		return this.length;
+		return this.height;
 	}
 	/**
 	 * Get the width of the brick
@@ -57,6 +60,8 @@ public class Brick
 	{
 		return this.width;
 	}
+	
+	
 	/**
 	 * Get the type
 	 * Returns the int
@@ -71,7 +76,17 @@ public class Brick
 		return this.lives;
 	}
 	
+	public boolean GetDestroyed(){
+		return this.destroyed;
+	}
+	
+	private void checkLife(){
+		if(this.lives >= 0){
+			this.destroyed = true;
+		}
+	}
 	public void ReduceLife(){
 		this.lives --;
+		checkLife();
 	}
 }
