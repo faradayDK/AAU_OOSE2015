@@ -20,14 +20,14 @@ public class Player {
 	}
 	
 	public void moveLeft() {
-	    position+=speed; 
-	    speed =speed+ 0.01f;
+	    position-=speed; 
+	    speed =speed+ 0.005f;
 
 
 	}
 	public void moveRight(){
-	    position-=speed;
-	    speed = speed + 0.01f;
+	    position+=speed;
+	    speed = speed + 0.005f;
 
 	}
 	public void resetSpeed(){
