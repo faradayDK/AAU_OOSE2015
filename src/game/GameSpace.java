@@ -14,13 +14,15 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables
-	public Brick [] bricks = new Brick[20];
+	public Brick [] bricks = new Brick[30];
+	public BrickSpawn brickSpawn;
 	public Ball ball;
 	public Player player;
 	
 	//Setup for the screen size
-	public static int spaceWidth = 720;
-	public static int spaceLength = 1280;
+	public static int spaceHeight = 720;
+	public static int spaceWidth = 1280;
+	public int BallChange = 10;
 	
 	
 	public GameSpace(String gameName)
@@ -32,14 +34,10 @@ public class GameSpace extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		ball = new Ball(100,100);
-		player = new Player(0.5f , (int)(spaceLength /2) , 120 , 20);
+		player = new Player(0.3f , (int)(spaceWidth /2) , 120 , 20);
 
 		//create grid of bricks
-		for (int x = 0; x< bricks.length; x++ )
-		{
-			//for (int y = 0 ; )
-			//bricks[x] = new Brick(1, x * 100, 100);
-		}
+		brickSpawn = new BrickSpawn(bricks, 100, 50, 1);
 
 	}
 
@@ -64,30 +62,30 @@ public class GameSpace extends BasicGame
     
         
         if(ball.GetY()> 600.0f && ball.GetY()<610.0f){
-        	if(ball.GetX()> player.position && ball.GetX() <player.position+100 ){
+        	if(ball.GetX()> player.position-8 && ball.GetX() <player.position+108 ){
         		ball.fliesDown = false;
         		if (input.isKeyDown(Input.KEY_LEFT)){
         			if(ball.fliesRight ==true){
         				
-        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/50);
-        				if( (ball.angleRatio-player.speed/50)<0){
+        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/BallChange);
+        				if( (ball.angleRatio-player.speed/BallChange)<0){
         					ball.fliesRight =false;
         				}
         				
         			}
         			else{
-        				ball.angleRatio = ball.angleRatio+player.speed/50;
+        				ball.angleRatio = ball.angleRatio+player.speed/BallChange;
         			}
         		
         		}
         		if (input.isKeyDown(Input.KEY_RIGHT)){
         			if(ball.fliesRight ==true){
-        				ball.angleRatio = ball.angleRatio+player.speed/50;
+        				ball.angleRatio = ball.angleRatio+player.speed/BallChange;
         				
         			}
         			else{
-        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/50);
-        				if((ball.angleRatio-player.speed/50)<0){
+        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/BallChange);
+        				if((ball.angleRatio-player.speed/BallChange)<0){
         					ball.fliesRight = true;
         				}
 
@@ -105,10 +103,12 @@ public class GameSpace extends BasicGame
 	{
 		ball.MoveBall();
 	
-    for(int i = 0 ; i<bricks.length; i++)
-	g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetLength() , bricks[i].GetWidth() );	
+    for(int i = 0 ; i<bricks.length; i++){
+	g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+	System.out.println(bricks[i].GetX());
+    }
    
-	g.drawRect(player.position , spaceWidth - 100, player.length , player.width);
+	g.drawRect(player.position , spaceHeight - 100, player.length , player.width);
 	g.drawOval(ball.GetX(), ball.GetY(), 20,20);
 	
 
@@ -122,7 +122,7 @@ public class GameSpace extends BasicGame
 			{
 				AppGameContainer appgc;
 				appgc = new AppGameContainer(new GameSpace("Breakout"));
-				appgc.setDisplayMode(spaceLength, spaceWidth , false);
+				appgc.setDisplayMode(spaceWidth, spaceHeight , false);
 				appgc.start();
 			}
 			catch (SlickException ex)
