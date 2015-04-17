@@ -105,8 +105,8 @@ public class GameSpace extends BasicGame
 	{
 		ball.MoveBall();
 	
-    //for(int i = 0 ; i<bricks.length; i++)
-	//g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetLength() , bricks[i].GetWidth() );	
+    for(int i = 0 ; i<bricks.length; i++)
+	g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetLength() , bricks[i].GetWidth() );	
    
 	g.drawRect(player.position , spaceWidth - 100, player.length , player.width);
 	g.drawOval(ball.GetX(), ball.GetY(), 20,20);
