@@ -42,7 +42,7 @@ public class GameSpace extends BasicGame
 	public int secondNumber =0;
 	public int firstNumber =0;
 	public boolean hit4score = false;
-	public int Score = 0;
+	public int Score = 0; //write any
 	private org.newdawn.slick.Image [] scoreImg = new org.newdawn.slick.Image[10];
 	
 	
