@@ -9,9 +9,10 @@ public class BrickSpawn {
 	private float height;
 	
 	
-	public BrickSpawn(Brick [] bricks, float startWidth, float startHeight, int type){
+	public BrickSpawn(Brick [] bricks, float startWidth, float startHeight, int type ){
 		this.height = startHeight; 
 		this.width = startWidth;
+
 		for(int i = 0 ; i < bricks.length ; i++){
 
 			bricks[i] = new Brick(type, this.width, this.height);
@@ -24,6 +25,8 @@ public class BrickSpawn {
 			else
 			width += bricksWidth + interval;
 			
+			if(i > 28 )
+				type = 2;
 		}
 
 	}

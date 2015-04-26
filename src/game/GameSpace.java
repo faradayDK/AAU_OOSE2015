@@ -8,13 +8,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Color;
 //Package "Basic Game" for 2D game development
 
 public class GameSpace extends BasicGame
 {
 
 	//Global variables
-	public Brick [] bricks = new Brick[30];
+	public Brick [] bricks = new Brick[90];
+	public Color [] colors = {Color.yellow, Color.blue , Color.green};
 	public BrickSpawn brickSpawn;
 	public Ball ball;
 	public Player player;
@@ -37,7 +39,7 @@ public class GameSpace extends BasicGame
 		player = new Player(0.3f , (int)(spaceWidth /2) , 120 , 20);
 
 		//create grid of bricks
-		brickSpawn = new BrickSpawn(bricks, 100, 50, 1);
+		brickSpawn = new BrickSpawn (bricks, 100, 50, 1);
 
 	}
 
@@ -104,12 +106,16 @@ public class GameSpace extends BasicGame
 		ball.MoveBall();
 	
     for(int i = 0 ; i<bricks.length; i++){
-	g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
-	System.out.println(bricks[i].GetX());
+    	if(!bricks[i].GetDestroyed()){
+    		g.setColor(colors[bricks[i].GetType() - 1]);
+	g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+    
+    	}
     }
-   
+    g.setColor(Color.white);
 	g.drawRect(player.position , spaceHeight - 100, player.length , player.width);
-	g.drawOval(ball.GetX(), ball.GetY(), 20,20);
+	g.setColor(Color.white);
+	g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 	
 	
 
