@@ -5,6 +5,7 @@ public class Ball {
 	public boolean fliesRight = true;
 	public boolean fliesDown  = true;
 	public float angleRatio = 0.2f;
+	//public static int Score = 0;
 	
 
 	public Ball( int x, int y){
@@ -42,9 +43,12 @@ public class Ball {
 			}
 			else {
 				fliesDown = false;
+				//Score++;
+			
 			}
 		}
 		if(fliesDown ==false){
+			//Score++;
 			if(this.y>0){
 				this.y = this.y-0.4f;
 			}
