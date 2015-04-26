@@ -1,6 +1,11 @@
 package game;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -10,6 +15,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Color;
+
+import javax.imageio.ImageIO;
 //Package "Basic Game" for 2D game development
 
 public class GameSpace extends BasicGame
@@ -35,13 +42,11 @@ public class GameSpace extends BasicGame
 	public int secondNumber =0;
 	public int firstNumber =0;
 	public boolean hit4score = false;
-	public int Score = 8;
+	public int Score = 0;
+	private org.newdawn.slick.Image [] scoreImg = new org.newdawn.slick.Image[10];
 	
 	
-	
-	
-	
-	
+	//ImageIO.read(new File("images/folder63.jpg"));
 	public GameSpace(String gameName)
 	{
 		super(gameName);
@@ -53,26 +58,20 @@ public class GameSpace extends BasicGame
 		ball = new Ball(100,100);
 		player = new Player(0.3f , (int)(spaceWidth /2) , 120 , 20);
 		
-
+		for(int i = 0; i < scoreImg.length; i++)
+		scoreImg[i] = new org.newdawn.slick.Image("/img/" + i + ".png");
+		
 		//create grid of bricks
 		brickSpawn = new BrickSpawn(bricks, 100, 50, 1);
 		
 		//import images for score
-		/*zero = new Image("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/0.png");
-		one = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/1.png");
-		two = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/2.png");
-		three = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/3.png");
-		four = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/4.png");
-		five = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/5.png");
-		six = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/6.png");
-		seven = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/7.png");
-		eight = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/8.png");
-		nine = new Image ("D:/Users/liza/Desktop/AAU/MED4/OOSE/MiniProject/9.png");
 		
-		first = zero;
-		second = zero;
-		third = zero;
-		fourth = zero;*/
+		first = scoreImg[0];
+		second = scoreImg[0];
+		third = scoreImg[0];
+		fourth = scoreImg[0];
+	
+	
 		
 
 	}
@@ -102,12 +101,12 @@ public class GameSpace extends BasicGame
         		ball.fliesDown = false;
         		
         		
-        		/*Score++;
+        		Score++;
         		counter();
         		first.draw(0,0);
         		second.draw(50, 0);
         		third.draw(100,0);
-        		fourth.draw(150,0);*/
+        		fourth.draw(150,0);
         		
         		
         		if (input.isKeyDown(Input.KEY_LEFT)){
@@ -170,8 +169,7 @@ public class GameSpace extends BasicGame
 	g.setColor(Color.white);
 	g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 	
-	
-	/*first.draw(0,0);
+	first.draw(0,0);
 	second.draw(50, 0);
 	third.draw(100,0);
 	fourth.draw(150,0);
@@ -202,107 +200,107 @@ public class GameSpace extends BasicGame
 		//fourth counter
 		
 			switch(fourthNumber) {
-			case 0: fourth = zero;
+			case 0: fourth = scoreImg[0];
 			break;
-			case 1: fourth = one;
+			case 1: fourth = scoreImg[1];
 			break;
-			case 2: fourth = two;
+			case 2: fourth = scoreImg[2];
 			break;
-			case 3: fourth = three;
+			case 3: fourth = scoreImg[3];
 			break;
-			case 4: fourth = four;
+			case 4: fourth = scoreImg[4];
 			break;
-			case 5: fourth = five;
+			case 5: fourth = scoreImg[5];
 			break;
-			case 6: fourth = six;
+			case 6: fourth = scoreImg[6];
 			break;
-			case 7: fourth = seven;
+			case 7: fourth = scoreImg[7];
 			break;
-			case 8: fourth = eight;
+			case 8: fourth = scoreImg[8];
 			break;
-			case 9: fourth = nine;
+			case 9: fourth = scoreImg[9];
 			break;
 			case 10: 
 				Score++;
-				fourth = zero;
+				fourth = scoreImg[0];
 			}
 			
 			switch(thirdNumber) {
 			//third number
-			case 0: third = zero;
+			case 0: third = scoreImg[0];
 			break;
-			case 1: third = one;
+			case 1: third = scoreImg[1];
 			break;
-			case 2: third = two;
+			case 2: third = scoreImg[2];
 			break;
-			case 3: third = three;
+			case 3: third = scoreImg[3];
 			break;
-			case 4: third = four;
+			case 4: third = scoreImg[4];
 			break;
-			case 5: third = five;
+			case 5: third = scoreImg[5];
 			break;
-			case 6: third = six;
+			case 6: third = scoreImg[6];
 			break;
-			case 7: third = seven;
+			case 7: third = scoreImg[7];
 			break;
-			case 8: third = eight;
+			case 8: third = scoreImg[8];
 			break;
-			case 9: third = nine;
+			case 9: third = scoreImg[9];
 			break;
 			case 10: 
 				secondNumber++;
 				thirdNumber = 0;
 			}
 			switch(secondNumber) {
-			case 0: second = zero;
+			case 0: second = scoreImg[0];
 			break;
-			case 1: second = one;
+			case 1: second = scoreImg[1];
 			break;
-			case 2: second = two;
+			case 2: second = scoreImg[2];
 			break;
-			case 3: second = three;
+			case 3: second = scoreImg[3];
 			break;
-			case 4: second = four;
+			case 4: second = scoreImg[4];
 			break;
-			case 5: second = five;
+			case 5: second = scoreImg[5];
 			break;
-			case 6: second = six;
+			case 6: second = scoreImg[6];
 			break;
-			case 7: second = seven;
+			case 7: second = scoreImg[7];
 			break;
-			case 8: second = eight;
+			case 8: second = scoreImg[8];
 			break;
-			case 9: second = nine;
+			case 9: second = scoreImg[9];
 			break;
 			case 10: 
 				Score++;
-				second = zero;
+				second = scoreImg[0];
 			}
 			switch(firstNumber) {
-			case 0: first = zero;
+			case 0: first = scoreImg[0];
 			break;
-			case 1: first = one;
+			case 1: first = scoreImg[1];
 			break;
-			case 2: first = two;
+			case 2: first = scoreImg[2];
 			break;
-			case 3: first = three;
+			case 3: first = scoreImg[3];
 			break;
-			case 4: first = four;
+			case 4: first = scoreImg[4];
 			break;
-			case 5: first = five;
+			case 5: first = scoreImg[5];
 			break;
-			case 6: first = six;
+			case 6: first = scoreImg[6];
 			break;
-			case 7: first = seven;
+			case 7: first = scoreImg[7];
 			break;
-			case 8: first = eight;
+			case 8: first = scoreImg[8];
 			break;
-			case 9: first = nine;
+			case 9: first = scoreImg[9];
 			break;
 			case 10: 
 				Score++;
-				first = zero;
-			}*/
+				first = scoreImg[0];
+			}
 			
 			
 			
