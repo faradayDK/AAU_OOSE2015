@@ -1,4 +1,5 @@
 package game;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
@@ -7,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -15,6 +17,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.state.StateBasedGame;
 
 import javax.imageio.ImageIO;
 //Package "Basic Game" for 2D game development
@@ -28,11 +31,12 @@ public class GameSpace extends BasicGame
 	public BrickSpawn brickSpawn;
 	public Ball ball;
 	public Player player;
-	
+
 	//Setup for the screen size
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
 	public int BallChange = 10;
+	public boolean Pressed= false;
 	
 	
 	//images for score
@@ -44,7 +48,9 @@ public class GameSpace extends BasicGame
 	public boolean hit4score = false;
 	public int Score = 0; //write any
 	private org.newdawn.slick.Image [] scoreImg = new org.newdawn.slick.Image[10];
-	
+	public boolean level = false;
+	int Xpos, Ypos;
+	private org.newdawn.slick.Image level1, level2, level3, exit;
 	
 	//ImageIO.read(new File("images/folder63.jpg"));
 	public GameSpace(String gameName)
@@ -70,15 +76,20 @@ public class GameSpace extends BasicGame
 		second = scoreImg[0];
 		third = scoreImg[0];
 		fourth = scoreImg[0];
+		
+		//import images for main menu
 	
+		level1 = new org.newdawn.slick.Image("/img/level1.png");
+		level2 = new org.newdawn.slick.Image("/img/level2.png");
+		level3 = new org.newdawn.slick.Image("/img/level3.png");
+		exit = new org.newdawn.slick.Image("/img/exit.png");
 	
+		level = false;
 		
 
 	}
-
-	@Override
-	public void update(GameContainer gc, int i) throws SlickException 
-	{
+	public void update(GameContainer gc, int i) throws SlickException {
+		if(level == true){
 		//Player control
 		Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_LEFT))
@@ -103,12 +114,7 @@ public class GameSpace extends BasicGame
         		
         		Score++;
         		counter();
-        		first.draw(0,0);
-        		second.draw(50, 0);
-        		third.draw(100,0);
-        		fourth.draw(150,0);
-        		
-        		
+        	
         		if (input.isKeyDown(Input.KEY_LEFT)){
         			if(ball.fliesRight ==true){
         				
@@ -141,17 +147,30 @@ public class GameSpace extends BasicGame
         	
         	}
         }
+        }
+	//change levels by clicking on menu
+        if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<254 && mouseClicked(0)){
+        	System.out.println(mouseClicked(0));
+				level = true;
+		if(Xpos>250 && Xpos<950 && Ypos>255 && Ypos<310)
+					//if(Mouse.isButtonDown(0))
+						//sbg.enterState(1);
+				
+		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
+						System.exit(0);
+		}
         
-		
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
-		System.out.println(Score);
-		ball.MoveBall();
+		Xpos = Mouse.getX();
+		 Ypos = Mouse.getY();
+		
 	
-
+		if(level == true) {
+			ball.MoveBall();
     for(int i = 0 ; i<bricks.length; i++){
     	if(!bricks[i].GetDestroyed()){
     		g.setColor(colors[bricks[i].GetType() - 1]);
@@ -169,15 +188,24 @@ public class GameSpace extends BasicGame
 	g.setColor(Color.white);
 	g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 	
+	//render score
 	first.draw(0,0);
 	second.draw(50, 0);
 	third.draw(100,0);
 	fourth.draw(150,0);
+	//moment of the collision
 	if (hit4score == true) {
     	counter();
     	hit4score = false;
     }
-	
+		}
+		if (level == false) {
+	//render main menu
+	level1.draw(250,100);
+	level2.draw(250,250);
+	level3.draw(250,400);
+	exit.draw(250,550);
+		}
 	
 	}
 	public void counter() {
@@ -306,7 +334,27 @@ public class GameSpace extends BasicGame
 			
 			}
 			
+	public class Main extends StateBasedGame{
+		public static final int menu = 0;
+		public static final int game = 1;
+
+		public Main(String name) {
+			super(name);
+			this.addState(new Menu(menu));
+		//	this.addState(new Game(game));
+		
+		}
+
+		
+		public void initStatesList(GameContainer gc) throws SlickException {
+	
+			this.getState(menu).init(gc, this);
 			
+			this.enterState(menu);
+		}
+		
+	
+	}
 	
 	//Main method
 	public static void main(String[] args)
@@ -324,5 +372,14 @@ public class GameSpace extends BasicGame
 			}
 		}
 
+	public boolean mouseClicked(int button){
+		//boolean pressed = Mouse.isButtonDown(button);
+		boolean pressed = Mouse.getEventButtonState();
+		
 	
+
+		return pressed;
+	
+	}
+
 }
