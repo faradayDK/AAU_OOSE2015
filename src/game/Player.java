@@ -1,4 +1,5 @@
 package game;
+import org.newdawn.slick.Input;
 
 public class Player {
 	public float position;
@@ -7,6 +8,7 @@ public class Player {
 	public int width;
 	private int color;
 	private float speedConstant;
+
 	
 	
 	public Player(float speed, float position, int length, int width) {
@@ -21,16 +23,19 @@ public class Player {
 	
 	public void moveLeft() {
 	    position-=speed; 
-	    speed =speed+ 0.005f;
+	    checkSpeed();
 
 
 	}
 	public void moveRight(){
 	    position+=speed;
-	    speed = speed + 0.005f;
-
+	    checkSpeed();
 	}
 	public void resetSpeed(){
 		speed = speedConstant;
+	}
+	private void checkSpeed(){
+		if(speed + 0.005f < 2.0f)
+		speed =speed+ 0.005f;
 	}
 }

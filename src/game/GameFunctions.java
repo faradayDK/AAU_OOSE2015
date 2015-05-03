@@ -1,5 +1,7 @@
 package game;
 
+import org.lwjgl.input.Mouse;
+
 public class GameFunctions {
 
 	private int length;
@@ -9,5 +11,11 @@ public class GameFunctions {
 	{
 		this.length = length;
 		this.width = width;
+	}
+	
+	public boolean mouseClicked(int button){
+		//boolean pressed = Mouse.isButtonDown(button);
+		boolean pressed = Mouse.getEventButtonState();
+		return pressed;
 	}
 }
