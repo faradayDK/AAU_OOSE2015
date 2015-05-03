@@ -2,10 +2,15 @@ package game;
 
 public class Ball {
 	private float x,y;
+	
 	private float previousX, previousY;
+	
 	public boolean fliesRight = true;
 	public boolean fliesDown  = true;
+	
 	public float angleRatio = 0.2f;	
+	
+	//public 
 
 	public Ball( int x, int y){
 		this.x = x;
