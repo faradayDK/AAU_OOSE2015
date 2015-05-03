@@ -19,8 +19,9 @@ public class Intersection {
 	
 	public boolean collisionBallBrick (Ball ball, Brick brick){
 		
-		if(ball.GetX() > brick.GetX() && ball.GetX() < (brick.GetX() + brick.GetWidth())){
-			if(ball.GetY() > brick.GetY() && ball.GetY() < (brick.GetY() + brick.GetHeight())){
+		float correction = 1.5f;
+		if(ball.GetX() + correction > brick.GetX() - correction && ball.GetX() - correction < (brick.GetX() + brick.GetWidth() + correction)){
+			if(ball.GetY() + correction > brick.GetY() - correction && ball.GetY() - correction  < (brick.GetY() + brick.GetHeight() + correction)){
 				return true;
 			}
 		}

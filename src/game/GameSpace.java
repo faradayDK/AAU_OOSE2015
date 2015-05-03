@@ -37,7 +37,7 @@ public class GameSpace extends BasicGame
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
 	
-	public int BallChange = 10;
+	public int BallChange = 5;
 	public boolean Pressed= false;
 	
 	
@@ -81,7 +81,7 @@ public class GameSpace extends BasicGame
 			scoreDisplayImg[i] = scoreImg[0];
 		
 		//create grid of bricks
-		brickSpawn = new BrickSpawn(bricks, 100, 50, 1);
+		brickSpawn = new BrickSpawn(bricks, 100, 50);
 		
 
 		
@@ -99,6 +99,7 @@ public class GameSpace extends BasicGame
 		
 		//If game level
 		if(level == true){
+			ball.MoveBall();
 			//////////////////////////////////////////
 			//Player control
 			Input input = gc.getInput();
@@ -111,14 +112,12 @@ public class GameSpace extends BasicGame
 			else 
 				player.resetSpeed();
     
-        
+			/////////////////////////////////////////
+			//Collision
        
         	if(intr.collisionBallPlayer(ball, player) ){
         		
         		ball.fliesDown = !ball.fliesDown;
-
-        		
-        		scoreCounter();
         	
         		if (input.isKeyDown(Input.KEY_LEFT)){
         			if(ball.fliesRight ==true){
@@ -151,17 +150,21 @@ public class GameSpace extends BasicGame
         		}
         	
         	}
-        	
-        	for(int i1 = 0 ; i1 < bricks.length ; i1++){
-        		if(intr.collisionBallBrick(ball, bricks[i1]) && !bricks[i1].GetDestroyed()){
-        		ball.fliesRight = !ball.fliesRight;
+        	/////////////////////////////
+        	//Collision with bricks
+        	for(int j = 0 ; j < bricks.length ; j++){
+        		if(intr.collisionBallBrick(ball, bricks[j]) && !bricks[j].GetDestroyed()){
+        		//ball.fliesRight = !ball.fliesRight;
         		ball.fliesDown = !ball.fliesDown;
-        		bricks[i1].ReduceLife();
+        		bricks[j].ReduceLife();
+        		scoreCounter();
         		}
         	}
         
         }
-	//change levels by clicking on menu
+		
+		
+		//change levels by clicking on menu
 		Xpos = Mouse.getX();
 		//use to solve upwards problem!
 		Ypos = spaceHeight - Mouse.getY();
@@ -188,16 +191,16 @@ public class GameSpace extends BasicGame
 	{
 
 		if(level == true) {
-			ball.MoveBall();
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
 					g.setColor(colors[bricks[i].GetType() - 1]);
 					g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
-    
+					g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+
 				}
 			}
 			for(int i = 0 ; i<bricks.length; i++){
-				g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+				//g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
 				//System.out.println(bricks[i].GetX());
 			}
 			g.setColor(Color.white);

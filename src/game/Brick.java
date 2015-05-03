@@ -81,12 +81,15 @@ public class Brick
 	}
 	
 	private void checkLife(){
-		if(this.lives >= 0){
+		if(this.lives <= 0){
 			this.destroyed = true;
+			return;
 		}
+		type = lives;
 	}
 	public void ReduceLife(){
 		this.lives --;
 		checkLife();
 	}
+	
 }
