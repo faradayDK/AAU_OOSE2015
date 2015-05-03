@@ -30,6 +30,8 @@ public class GameSpace extends BasicGame
 	//create ball and player object
 	public Ball ball;
 	public Player player;
+	
+	public Intersection intr = new Intersection();
 
 	//Setup for the screen size
 	public static int spaceHeight = 720;
@@ -43,7 +45,7 @@ public class GameSpace extends BasicGame
 	private Image [] scoreDisplayImg = new Image[4];
 	//Number to display score
 	public int [] scoreDisplayNumber = new int[4];
-	//totall score number
+	//total score number
 	public int score = 0; 
 	
 	public boolean hit4score = false;
@@ -110,11 +112,12 @@ public class GameSpace extends BasicGame
 				player.resetSpeed();
     
         
-        if(ball.GetY()> 600.0f && ball.GetY()<610.0f){
-        	if(ball.GetX()> player.position-8 && ball.GetX() <player.position+108 ){
-        		ball.fliesDown = false;
+       
+        	if(intr.collisionBallPlayer(ball, player) ){
+        		
+        		ball.fliesDown = !ball.fliesDown;
 
-        		score++;
+        		
         		scoreCounter();
         	
         		if (input.isKeyDown(Input.KEY_LEFT)){
@@ -148,7 +151,15 @@ public class GameSpace extends BasicGame
         		}
         	
         	}
-        }
+        	
+        	for(int i1 = 0 ; i1 < bricks.length ; i1++){
+        		if(intr.collisionBallBrick(ball, bricks[i1]) && !bricks[i1].GetDestroyed()){
+        		ball.fliesRight = !ball.fliesRight;
+        		ball.fliesDown = !ball.fliesDown;
+        		bricks[i1].ReduceLife();
+        		}
+        	}
+        
         }
 	//change levels by clicking on menu
 		Xpos = Mouse.getX();
@@ -157,7 +168,7 @@ public class GameSpace extends BasicGame
 		//System.out.println(Xpos + " " + Ypos);
 	
         if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<254 && mouseClicked(0)){
-        	System.out.println(mouseClicked(0));
+        	//System.out.println(mouseClicked(0));
 				level = true;
 		if(Xpos>250 && Xpos<950 && Ypos>255 && Ypos<310)
 					//if(Mouse.isButtonDown(0))
@@ -166,6 +177,8 @@ public class GameSpace extends BasicGame
 		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
 						System.exit(0);
 		}
+        
+       
         
         
 	}
@@ -188,7 +201,7 @@ public class GameSpace extends BasicGame
 				//System.out.println(bricks[i].GetX());
 			}
 			g.setColor(Color.white);
-			g.drawRect(player.position , spaceHeight - 100, player.length , player.width);
+			g.drawRect(player.GetX() , spaceHeight - 100, player.length , player.width);
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 	
@@ -232,6 +245,7 @@ public class GameSpace extends BasicGame
 	
 	
 	public void scoreCounter() {
+		score++;
 		int FalseScore = score;
 		if(FalseScore>999){
 			scoreDisplayNumber[0]  = (int)(FalseScore/1000);
