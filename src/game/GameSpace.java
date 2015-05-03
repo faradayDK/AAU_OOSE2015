@@ -1,12 +1,11 @@
 package game;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+//import java.awt.image.BufferedImage;
+//import java.io.File;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.imageio.ImageIO;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
@@ -18,22 +17,24 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Color;
 
-import javax.imageio.ImageIO;
+
 //Package "Basic Game" for 2D game development
 
 public class GameSpace extends BasicGame
 {
 
-	//Global variables
+	//Global variables for bricks
 	public Brick [] bricks = new Brick[90];
 	public Color [] colors = {Color.yellow, Color.blue , Color.green};
 	public BrickSpawn brickSpawn;
+	//create ball and player object
 	public Ball ball;
 	public Player player;
 
 	//Setup for the screen size
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
+	
 	public int BallChange = 10;
 	public boolean Pressed= false;
 	
@@ -47,10 +48,10 @@ public class GameSpace extends BasicGame
 	
 	public boolean hit4score = false;
 	
-	private org.newdawn.slick.Image [] scoreImg = new org.newdawn.slick.Image[10];
+	private Image [] scoreImg = new Image[10];
 	public boolean level = false;
 	int Xpos, Ypos;
-	private org.newdawn.slick.Image level1, level2, level3, exit;
+	private Image level1, level2, level3, exit;
 	
 	public GameSpace(String gameName)
 	{
@@ -112,8 +113,7 @@ public class GameSpace extends BasicGame
         if(ball.GetY()> 600.0f && ball.GetY()<610.0f){
         	if(ball.GetX()> player.position-8 && ball.GetX() <player.position+108 ){
         		ball.fliesDown = false;
-        		
-        		
+
         		score++;
         		scoreCounter();
         	
@@ -228,7 +228,6 @@ public class GameSpace extends BasicGame
 	public boolean mouseClicked(int button){
 		boolean pressed = Mouse.isButtonDown(button);
 		return pressed;
-	
 	}
 	
 	
