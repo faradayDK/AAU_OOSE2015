@@ -340,7 +340,7 @@ public class GameSpace extends BasicGame
 
 		public Main(String name) {
 			super(name);
-			this.addState(new Menu(menu));
+		//	this.addState(new Menu(menu));
 		//	this.addState(new Game(game));
 		
 		}
