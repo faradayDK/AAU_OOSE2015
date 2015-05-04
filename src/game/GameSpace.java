@@ -37,7 +37,7 @@ public class GameSpace extends BasicGame
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
 	
-	public int BallChange = 5;
+	
 	public boolean Pressed= false;
 	
 	
@@ -127,32 +127,11 @@ public class GameSpace extends BasicGame
         		ball.fliesDown = !ball.fliesDown;
         	
         		if (input.isKeyDown(Input.KEY_LEFT)){
-        			if(ball.fliesRight ==true){
-        				
-        				
-        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/BallChange);
-        				if( (ball.angleRatio-player.speed/BallChange)<0){
-        					ball.fliesRight =false;
-        				}
-        				
-        			}
-        			else{
-        				ball.angleRatio = ball.angleRatio+player.speed/BallChange;
-        			}
+        			ball.BallAngle1(player);
         		
         		}
         		if (input.isKeyDown(Input.KEY_RIGHT)){
-        			if(ball.fliesRight ==true){
-        				ball.angleRatio = ball.angleRatio+player.speed/BallChange;
-        				
-        			}
-        			else{
-        				ball.angleRatio = Math.abs(ball.angleRatio-player.speed/BallChange);
-        				if((ball.angleRatio-player.speed/BallChange)<0){
-        					ball.fliesRight = true;
-        				}
-
-        			}
+        			ball.BallAngle2(player);
         		
         		}
         	
