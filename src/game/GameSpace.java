@@ -54,7 +54,7 @@ public class GameSpace extends BasicGame
 	public int level = 0;
 	int Xpos, Ypos;
 	private Image level1, exit, back, back1;
-	
+	private Image [] brickTex = new Image[3];
 	public GameSpace(String gameName)
 	{
 		super(gameName);
@@ -92,6 +92,9 @@ public class GameSpace extends BasicGame
 		exit = new org.newdawn.slick.Image("/img/exit.png");
 		back = new org.newdawn.slick.Image("/img/back.jpg");
 		back1 = new org.newdawn.slick.Image("/img/back1.jpg");
+		//import images for brick textures
+		for(int i = 0; i < brickTex.length; i++)
+			brickTex[i] = new org.newdawn.slick.Image("/img/"+"brick" + (i + 1) + ".png");
 		
 
 
@@ -191,9 +194,10 @@ public class GameSpace extends BasicGame
 			back.draw(0,0);
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
-					g.setColor(colors[bricks[i].GetType() - 1]);
-					g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
-					g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+				//	g.setColor(colors[bricks[i].GetType() - 1]);
+				//	g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+				//	g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+					brickTex[bricks[i].GetType()-1].draw(bricks[i].GetX(), bricks[i].GetY());
 
 				}
 			}
@@ -214,12 +218,12 @@ public class GameSpace extends BasicGame
 		 else if(level ==2){
 			 back.draw(0,0);
 				for(int i = 0 ; i<bricks.length; i++){
-					if(!bricks[i].GetDestroyed()){
+					/*if(!bricks[i].GetDestroyed()){
 						g.setColor(colors[bricks[i].GetType() - 1]);
 						g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
 						g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
 
-					}
+					}*/
 				}
 				//Display score images
 				for(int i = 0 ; i<scoreDisplayImg.length; i++)
