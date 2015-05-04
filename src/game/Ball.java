@@ -7,8 +7,10 @@ public class Ball {
 	
 	public boolean fliesRight = true;
 	public boolean fliesDown  = true;
+	public float leftBorder = 100.0f;
+	public float rightBorder = 1120.0f;
 	
-	public float angleRatio = 0.2f;	
+	public float angleRatio = 2.0f;	
 	
 	//public 
 
@@ -28,13 +30,13 @@ public class Ball {
 	public void MoveBall(){
 		
 		if (fliesRight == true){
-			if(this.x<1280){
+			if(this.x<=rightBorder){
 				this.x = this.x+ angleRatio;
 			}
 
 		}
 		if (fliesRight == false){
-			if(this.x>0.0f){
+			if(this.x>=leftBorder){
 				this.x = this.x-angleRatio;
 			}
 
@@ -42,26 +44,39 @@ public class Ball {
 		}
 		if (fliesDown == true){
 			if(this.y<720.0f){
-				this.y = this.y+0.4f;
+				this.y = this.y+2.0f;
 			}
 
 		}
 		if(fliesDown ==false){
 			//Score++;
 			if(this.y>0){
-				this.y = this.y-0.4f;
+				this.y = this.y-2.0f;
 			}
 
 		}
 		checkDirection();
-		previousY = y;
-		previousX = x;
+		//previousY = y;
+		//previousX = x;
 		
 		
 	
 	}
 	
 	private void checkDirection(){
+		if(this.x<=leftBorder){
+			fliesRight =true;
+		}
+		if(this.x>=rightBorder){
+			fliesRight =false;
+		}
+		
+		
+		
+		
+		
+		
+		/*
 		if(this.y - previousY >=0)
 			fliesDown = true;
 		else
@@ -75,6 +90,6 @@ public class Ball {
 		if(this.y >= 720 || this.y <= 0)
 			fliesDown = !fliesDown;
 		if(this.x  >=1280 || this.x <= 0)
-			fliesRight = !fliesRight;
+			fliesRight = !fliesRight;	*/
 	}
 }

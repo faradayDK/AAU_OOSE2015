@@ -8,7 +8,7 @@ public class Intersection {
 	
 	public boolean collisionBallPlayer(Ball ball, Player player){
 		
-		if(ball.GetX() > player.GetX() && ball.GetX() < (player.GetX() + player.GetLength())){
+		if(ball.GetX() > player.GetX()-5 && ball.GetX() < (player.GetX() + player.GetLength()+5)){
 			if(ball.GetY() > player.GetY() && ball.GetY() < (player.GetY() + player.GetWidth())){
 				return true;
 			}

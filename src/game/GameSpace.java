@@ -53,7 +53,7 @@ public class GameSpace extends BasicGame
 	private Image [] scoreImg = new Image[10];
 	public boolean level = false;
 	int Xpos, Ypos;
-	private Image level1, level2, level3, exit;
+	private Image level1, level2, level3, exit, back;
 	
 	public GameSpace(String gameName)
 	{
@@ -65,8 +65,8 @@ public class GameSpace extends BasicGame
 	public void init(GameContainer gc) throws SlickException
 	{
 		//assign location for ball and player
-		ball = new Ball(100,100);
-		player = new Player(0.3f , (int)(spaceWidth /2) , 120 , 20);
+		ball = new Ball(400,400);
+		player = new Player(2.0f , (int)(spaceWidth /2) , 120 , 20);
 		
 		//assign images for each score
 		for(int i = 0; i < scoreImg.length; i++)
@@ -92,10 +92,13 @@ public class GameSpace extends BasicGame
 		level2 = new org.newdawn.slick.Image("/img/level2.png");
 		level3 = new org.newdawn.slick.Image("/img/level3.png");
 		exit = new org.newdawn.slick.Image("/img/exit.png");
+		
+		
 
 
 	}
-	public void update(GameContainer gc, int i) throws SlickException {
+	public void update(GameContainer gc, int delta) throws SlickException {
+		
 		
 		//If game level
 		if(level == true){
@@ -103,11 +106,16 @@ public class GameSpace extends BasicGame
 			//////////////////////////////////////////
 			//Player control
 			Input input = gc.getInput();
-			if (input.isKeyDown(Input.KEY_LEFT))
+			if (input.isKeyDown(Input.KEY_LEFT)){
+				
 				player.moveLeft();
+				player.checkBorders();
+			}
        
-			else if (input.isKeyDown(Input.KEY_RIGHT))
+			else if (input.isKeyDown(Input.KEY_RIGHT)){
 				player.moveRight();
+				player.checkBorders();
+			}
         
 			else 
 				player.resetSpeed();
@@ -191,6 +199,7 @@ public class GameSpace extends BasicGame
 	{
 
 		if(level == true) {
+		
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
 					g.setColor(colors[bricks[i].GetType() - 1]);
@@ -232,6 +241,10 @@ public class GameSpace extends BasicGame
 				AppGameContainer appgc;
 				appgc = new AppGameContainer(new GameSpace("Breakout"));
 				appgc.setDisplayMode(spaceWidth, spaceHeight , false);
+				 appgc.setVSync(true);
+				 appgc.setMaximumLogicUpdateInterval(60);
+		         appgc.setMinimumLogicUpdateInterval(1);
+		        
 				appgc.start();
 			}
 			catch (SlickException ex)
