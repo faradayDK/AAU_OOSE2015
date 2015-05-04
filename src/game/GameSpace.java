@@ -53,7 +53,7 @@ public class GameSpace extends BasicGame
 	private Image [] scoreImg = new Image[10];
 	public boolean level = false;
 	int Xpos, Ypos;
-	private Image level1, level2, level3, exit, back;
+	private Image level1, exit, back, back1;
 	
 	public GameSpace(String gameName)
 	{
@@ -88,11 +88,10 @@ public class GameSpace extends BasicGame
 		
 		//import images for main menu
 	
-		level1 = new org.newdawn.slick.Image("/img/level1.png");
-		level2 = new org.newdawn.slick.Image("/img/level2.png");
-		level3 = new org.newdawn.slick.Image("/img/level3.png");
+		level1 = new org.newdawn.slick.Image("/img/NewGame.png");
 		exit = new org.newdawn.slick.Image("/img/exit.png");
-		
+		back = new org.newdawn.slick.Image("/img/back.jpg");
+		back1 = new org.newdawn.slick.Image("/img/back1.jpg");
 		
 
 
@@ -199,7 +198,7 @@ public class GameSpace extends BasicGame
 	{
 
 		if(level == true) {
-		
+			back.draw(0,0);
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
 					g.setColor(colors[bricks[i].GetType() - 1]);
@@ -224,10 +223,10 @@ public class GameSpace extends BasicGame
 		
 		else if (level == false) {
 			//render main menu
-			level1.draw(250,100);
-			level2.draw(250,250);
-			level3.draw(250,400);
-			exit.draw(250,550);
+		
+			back1.draw(0,0);
+			level1.draw(100,100);
+			exit.draw(100,400);
 			}
 	
 	}
