@@ -51,7 +51,7 @@ public class GameSpace extends BasicGame
 	public boolean hit4score = false;
 	
 	private Image [] scoreImg = new Image[10];
-	public boolean level = false;
+	public int level = 0;
 	int Xpos, Ypos;
 	private Image level1, exit, back, back1;
 	
@@ -100,7 +100,7 @@ public class GameSpace extends BasicGame
 		
 		
 		//If game level
-		if(level == true){
+		if(level == 1){
 			ball.MoveBall();
 			//////////////////////////////////////////
 			//Player control
@@ -146,6 +146,10 @@ public class GameSpace extends BasicGame
         		scoreCounter();
         		}
         	}
+        	if(ball.GetY()>700){
+        		level =2;
+        		
+        	}
         
         }
 		
@@ -158,7 +162,7 @@ public class GameSpace extends BasicGame
 	
         if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<254 && mouseClicked(0)){
         	//System.out.println(mouseClicked(0));
-				level = true;
+				level = 1;
 		if(Xpos>250 && Xpos<950 && Ypos>255 && Ypos<310)
 					//if(Mouse.isButtonDown(0))
 						//sbg.enterState(1);
@@ -175,8 +179,15 @@ public class GameSpace extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
+		 if (level == 0) {
+			//render main menu
+		
+			back1.draw(0,0);
+			level1.draw(100,100);
+			exit.draw(100,400);
+		 }
 
-		if(level == true) {
+		 else if(level == 1) {
 			back.draw(0,0);
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
@@ -194,20 +205,26 @@ public class GameSpace extends BasicGame
 			g.drawRect(player.GetX() , spaceHeight - 100, player.length , player.width);
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
+			
 	
 			//Display score images
 			for(int i = 0 ; i<scoreDisplayImg.length; i++)
 			scoreDisplayImg[i].draw(i*50,0);
 		}
-		
-		else if (level == false) {
-			//render main menu
-		
-			back1.draw(0,0);
-			level1.draw(100,100);
-			exit.draw(100,400);
-			}
-	
+		 else if(level ==2){
+			 back.draw(0,0);
+				for(int i = 0 ; i<bricks.length; i++){
+					if(!bricks[i].GetDestroyed()){
+						g.setColor(colors[bricks[i].GetType() - 1]);
+						g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+						g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
+
+					}
+				}
+				//Display score images
+				for(int i = 0 ; i<scoreDisplayImg.length; i++)
+				scoreDisplayImg[i].draw(i*50,0);
+		}
 	}
 
 	
