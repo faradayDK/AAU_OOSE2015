@@ -30,6 +30,10 @@ public class GameSpace extends BasicGame
 	//create ball and player object
 	public Ball ball;
 	public Player player;
+	public Timer timer;
+	
+	public int lives = 3;
+
 	
 	public Intersection intr = new Intersection();
 
@@ -53,8 +57,9 @@ public class GameSpace extends BasicGame
 	private Image [] scoreImg = new Image[10];
 	public int level = 0;
 	int Xpos, Ypos;
-	private Image level1, exit, back, back1;
+	private Image level1, exit, back, back1, livesWord, life;
 	private Image [] brickTex = new Image[3];
+	private Image[] loseLife = new Image[3];
 	public GameSpace(String gameName)
 	{
 		super(gameName);
@@ -67,6 +72,8 @@ public class GameSpace extends BasicGame
 		//assign location for ball and player
 		ball = new Ball(400,400);
 		player = new Player(2.0f , (int)(spaceWidth /2) , 120 , 20);
+		timer = new Timer(50,3);
+	
 		
 		//assign images for each score
 		for(int i = 0; i < scoreImg.length; i++)
@@ -92,9 +99,14 @@ public class GameSpace extends BasicGame
 		exit = new org.newdawn.slick.Image("/img/exit.png");
 		back = new org.newdawn.slick.Image("/img/back.jpg");
 		back1 = new org.newdawn.slick.Image("/img/back1.jpg");
+		livesWord = new org.newdawn.slick.Image("img/LivesWord.png");
+		life = new org.newdawn.slick.Image("img/Life.png");
+		for (int i =0; i<loseLife.length; i++)
+			loseLife[i] = new org.newdawn.slick.Image("img/lost"+ (i+1) +".png");
+		
 		//import images for brick textures
 		for(int i = 0; i < brickTex.length; i++)
-			brickTex[i] = new org.newdawn.slick.Image("/img/"+"brick" + (i + 1) + ".png");
+			brickTex[i] = new org.newdawn.slick.Image("/img/"+"brick" + (4-(i + 1)) + ".png");
 		
 
 
@@ -150,9 +162,11 @@ public class GameSpace extends BasicGame
         		}
         	}
         	if(ball.GetY()>700){
+        		lives--;
         		level =2;
         		
         	}
+        	
         
         }
 		
@@ -173,10 +187,14 @@ public class GameSpace extends BasicGame
 		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
 						System.exit(0);
 		}
-        
-       
-        
-        
+        if (timer.delay == 0){
+        	ball.resetBall();
+			 level = 1;
+			 timer.resetDelay();
+		 }
+        if (lives== 0){
+        	level = 3;
+        }      
 	}
 
 	@Override
@@ -188,10 +206,27 @@ public class GameSpace extends BasicGame
 			back1.draw(0,0);
 			level1.draw(100,100);
 			exit.draw(100,400);
+			
 		 }
 
 		 else if(level == 1) {
 			back.draw(0,0);
+			livesWord.draw(900,8);
+			if(lives == 3){
+				life.draw(980,5);
+				life.draw(1020,5);
+				life.draw(1060,5);
+				
+			}
+			if (lives ==2){
+				life.draw(1020,5);
+				life.draw(1060,5);
+				
+			}
+			if (lives ==1){
+				life.draw(1060,5);
+				
+			}
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
 				//	g.setColor(colors[bricks[i].GetType() - 1]);
@@ -217,6 +252,7 @@ public class GameSpace extends BasicGame
 		}
 		 else if(level ==2){
 			 back.draw(0,0);
+
 				for(int i = 0 ; i<bricks.length; i++){
 					/*if(!bricks[i].GetDestroyed()){
 						g.setColor(colors[bricks[i].GetType() - 1]);
@@ -227,8 +263,20 @@ public class GameSpace extends BasicGame
 				}
 				//Display score images
 				for(int i = 0 ; i<scoreDisplayImg.length; i++)
-				scoreDisplayImg[i].draw(i*50,0);
-		}
+				scoreDisplayImg[i].draw(i*50,0);		
+				if(timer.delay==3){
+					loseLife[2].draw(0,0);
+					timer.timerStart();
+				}
+				if (timer.delay ==2){
+					loseLife[1].draw(0,0);
+					timer.timerStart();
+				}
+				if(timer.delay == 1){
+					loseLife[0].draw(0,0);
+					timer.timerStart();
+				}
+		 } 
 	}
 
 	
@@ -284,4 +332,9 @@ public class GameSpace extends BasicGame
 			
 
 	}
+	public void resetLevel(){
+	level = 1;
+		
+	}
+		
 }
