@@ -167,25 +167,12 @@ public class GameSpace extends BasicGame
         		
         	}
         	
+        	
         
-        }
+        
 		
 		
-		//change levels by clicking on menu
-		Xpos = Mouse.getX();
-		//use to solve upwards problem!
-		Ypos = spaceHeight - Mouse.getY();
-		//System.out.println(Xpos + " " + Ypos);
-	
-        if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<254 && mouseClicked(0)){
-        	//System.out.println(mouseClicked(0));
-				level = 1;
-		if(Xpos>250 && Xpos<950 && Ypos>255 && Ypos<310)
-					//if(Mouse.isButtonDown(0))
-						//sbg.enterState(1);
-				
-		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
-						System.exit(0);
+		
 		}
         if (timer.delay == 0){
         	ball.resetBall();
@@ -193,8 +180,28 @@ public class GameSpace extends BasicGame
 			 timer.resetDelay();
 		 }
         if (lives== 0){
-        	level = 3;
-        }      
+        	level = 0;
+        	lives = 3;
+        	ball.resetBall();
+        	
+        	
+        }   
+        if (level == 0) {
+        	//change levels by clicking on menu
+    		
+    		Xpos = Mouse.getX();
+    		//use to solve upwards problem!
+    		Ypos = spaceHeight - Mouse.getY();
+    	
+            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0)){
+    				level = 1;
+    				
+    		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
+    						System.exit(0);
+            }
+        }
+    		
+        
 	}
 
 	@Override
@@ -229,9 +236,6 @@ public class GameSpace extends BasicGame
 			}
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
-				//	g.setColor(colors[bricks[i].GetType() - 1]);
-				//	g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
-				//	g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
 					brickTex[bricks[i].GetType()-1].draw(bricks[i].GetX(), bricks[i].GetY());
 
 				}
@@ -253,15 +257,7 @@ public class GameSpace extends BasicGame
 		 else if(level ==2){
 			 back.draw(0,0);
 
-				for(int i = 0 ; i<bricks.length; i++){
-					/*if(!bricks[i].GetDestroyed()){
-						g.setColor(colors[bricks[i].GetType() - 1]);
-						g.fillRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
-						g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
-
-					}*/
-				}
-				//Display score images
+				//Display score images and lose life images
 				for(int i = 0 ; i<scoreDisplayImg.length; i++)
 				scoreDisplayImg[i].draw(i*50,0);		
 				if(timer.delay==3){
