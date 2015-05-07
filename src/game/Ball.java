@@ -92,6 +92,7 @@ public class Ball {
 		fliesRight = true;
 		fliesDown = true;
 		angleRatio = 2.0f;
+		ResetBallAcceleration();
 	}
 	private void BallCorrection(){
 		makeBallFlySlower = angleRatio/3;
@@ -102,6 +103,9 @@ public class Ball {
 		ballAcceleration = ballAcceleration+0.001f;
 		if(ballAcceleration>6.0f)
 			ballAcceleration = 6.0f;
+	}
+	public void ResetBallAcceleration(){
+		ballAcceleration = ballAcceleration/2;
 	}
 	
 	public boolean Collision(Player player){
