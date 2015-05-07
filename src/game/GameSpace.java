@@ -127,7 +127,7 @@ public class GameSpace extends BasicGame
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
         		//scoreCounter();
-        		score.Add();
+        		score.Add(1);
         		}
         	}
         	if(ball.GetY()>700){

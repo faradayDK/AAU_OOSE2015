@@ -67,20 +67,28 @@ public class Score {
 			//with a first run the number is going to be 1000,
 			//the second is going to be 100
 			//then 10
-			
-			//
+			//It will help to decompose the score number (e.g. 6456) to a four simple digits -> 6 , 4 ,5 ,6
+
 			int number = (int) Math.pow(10, scoreDisplayNumber.length-1-i);
 			if(number >= 10){
+				//checks whether the score can be divisible by certain decimal
+				//if no -> leave this digit as 0
 				if(scoreCountingModulo> number - 1){
+					//then it counts what kind of number should this certain digit take
 					scoreDisplayNumber[i]  = (int)(scoreCountingModulo/number);
+					/*then it removes the decimal part from the score (if number was 8278, after % operation it will become 278
+					 *it prepares it for the next digit
+					 */
 					scoreCountingModulo = scoreCountingModulo - number*scoreDisplayNumber[i];
 				}
 			}
+			//if modulo is lower than 10 it assigns it to the last digit 
 			else if (scoreCountingModulo<10){
 				scoreDisplayNumber[i]  = scoreCountingModulo;
 			}
 		}
-		
+		//after the numbers for each digit are calculated
+		//we assign images for each of these 4-digits, that corresponds to the numbers, that should be displayed
 		for( int i = 0 ; i < scoreDisplayImg.length ; i++)
 			scoreDisplayImg[i] = scoreAllImg[scoreDisplayNumber[i]];
 	}
