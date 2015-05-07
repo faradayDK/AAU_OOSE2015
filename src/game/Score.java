@@ -59,6 +59,11 @@ public class Score {
 	}
 	
 	public void Reset(){
-		score = 0;
+		score = -1;
+		Add();
+		
+
+		
+		
 	}
 }

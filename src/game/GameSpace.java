@@ -39,7 +39,6 @@ public class GameSpace extends BasicGame
 	int Xpos, Ypos;
 
 	private Image level_0_NewGame, level_0_exit, level_0_backgroundImg, level_1_backgroundImg, level_3_backgroundImg;
-	private Image [] brickTex = new Image[3];
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -109,8 +108,6 @@ public class GameSpace extends BasicGame
 				player.moveRight();
 			else 
 				player.resetSpeed();
-
-    
 			/////////////////////////////////////////
 			//Collision
         	if(ball.Collision(player) ){
@@ -139,9 +136,7 @@ public class GameSpace extends BasicGame
         	if (input.isKeyPressed(Input.KEY_ESCAPE)){
         		level = 3;
         		System.out.println(level);
-        	}
-        	
-		
+        	}     		
 		}
 		
 		//this Code will run for pause
@@ -153,13 +148,13 @@ public class GameSpace extends BasicGame
     				level = 1;
             }
     		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
+    			score.Reset();
     			level = 0;
             	life.Reset();
             	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
             	ball.Reset();
             	player.Reset();
-            	score.Reset();
-    		;
+            	
     		}
     		if (level==3 && input.isKeyPressed(Input.KEY_ESCAPE)){
         		level = 1;
@@ -183,10 +178,6 @@ public class GameSpace extends BasicGame
         	ball.Reset();
         	player.Reset();
         	score.Reset();
-
-        	
-        	
-
         }   
 	}
 
