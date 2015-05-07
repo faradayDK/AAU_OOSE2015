@@ -16,9 +16,8 @@ public class Score {
 	private Image [] scoreDisplayImg = new Image[4];
 	//Array stores images for all digits : 0 1 2 3 4 5 6 7 8 9
 	private static Image [] scoreAllImg = new Image[10];
-	
 	private static Image scoreWord;
-	
+		
 	/**
 	 * Constructor for the score 
 	 */
@@ -76,7 +75,7 @@ public class Score {
 	public void Display(float startX, float startY){
 		scoreWord.draw(startX, startY);
 		for(int i = 0 ; i<scoreDisplayImg.length; i++)
-		scoreDisplayImg[i].draw(startX + 100 +(i*50),startY);
+		scoreDisplayImg[i].draw(startX + 100 +(i*30),startY);
 	}
 	
 	public void Reset(){
