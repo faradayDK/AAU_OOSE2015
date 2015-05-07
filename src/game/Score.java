@@ -28,6 +28,14 @@ public class Score {
 			} catch (SlickException e) {
 				System.out.println("/img/" + i + ".png cannot be found");
 			}
+
+		//assign image for the score word
+		try {
+			scoreWord = new Image("/img/ScoreWord.png");
+		} catch (SlickException e) {
+			System.out.println("/img/ScoreWord.png cannot be found");
+		}
+
 		
 		//Number that will be displayed
 		for(int i = 0 ; i < scoreDisplayNumber.length ; i++)
