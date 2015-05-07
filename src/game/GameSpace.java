@@ -134,8 +134,10 @@ public class GameSpace extends BasicGame
 		}
         if (timer.delay == 0){
         	ball.resetBall();
+        	player.ResetPlayer();
 			 level = 1;
 			 timer.resetDelay();
+			 ball.ballAcceleration = ball.ballAcceleration/2;
 		 }
         
         if (lives== 0){
@@ -143,6 +145,8 @@ public class GameSpace extends BasicGame
         	lives = 3;
         	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
         	ball.resetBall();
+        	player.ResetPlayer();
+        	 ball.ballAcceleration = ball.ballAcceleration/2;
         	
         	
         }   
@@ -244,11 +248,5 @@ public class GameSpace extends BasicGame
 	public boolean mouseClicked(int button){
 		boolean pressed = Mouse.isButtonDown(button);
 		return pressed;
-	}
-	
-	public void resetLevel(){
-	level = 1;
-		
-	}
-		
+	}	
 }

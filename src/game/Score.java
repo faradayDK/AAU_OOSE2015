@@ -59,7 +59,7 @@ public class Score {
 	
 	public void DisplayScore(){
 		for(int i = 0 ; i<scoreDisplayImg.length; i++)
-		scoreDisplayImg[i].draw(i*50,0);
+		scoreDisplayImg[i].draw(100+(i*50),0);
 	}
 	
 	public void ResetScore(){
