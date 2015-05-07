@@ -41,7 +41,7 @@ public class GameSpace extends BasicGame
 
 	private Image level_0_NewGame, level_0_exit,
 	level_0_backgroundImg, level_1_backgroundImg, 
-	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
+	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg, playerSkin, scoreWord;
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -71,6 +71,9 @@ public class GameSpace extends BasicGame
 		level_3_backgroundImg = new Image("/img/ifPause.png");
 		level_4_backgroundImg = new Image("/img/ifLost.png");
 		level_5_backgroundImg = new Image("/img/ifWinner.png");
+		playerSkin = new  Image("/img/PlayerSkin.png");
+		scoreWord = new Image("/img/ScoreWord.png");
+		
 		
 		
 		//Assign images for the 
@@ -171,7 +174,7 @@ public class GameSpace extends BasicGame
 			
 			Xpos = Mouse.getX();
     		Ypos = spaceHeight - Mouse.getY();
-            if(Xpos>250 && Xpos<950 && Ypos>250 && Ypos<440 && mouseClicked(0)){
+            if(Xpos>0 && Xpos<600 && Ypos>550 && Ypos<720 && mouseClicked(0)){
             	score.Reset();
     			level = 1;
             	life.Reset();
@@ -179,7 +182,7 @@ public class GameSpace extends BasicGame
             	ball.Reset();
             	player.Reset();
             }
-    		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
+    		if (Xpos>600 && Xpos<1228 && Ypos>550 && Ypos<720 && mouseClicked(0)){
     			score.Reset();
     			level = 0;
             	life.Reset();
@@ -194,7 +197,7 @@ public class GameSpace extends BasicGame
 			
 			Xpos = Mouse.getX();
     		Ypos = spaceHeight - Mouse.getY();
-            if(Xpos>250 && Xpos<950 && Ypos>250 && Ypos<440 && mouseClicked(0)){
+    		if(Xpos>0 && Xpos<600 && Ypos>550 && Ypos<720 && mouseClicked(0)){
             	score.Reset();
     			level = 1;
             	life.Reset();
@@ -202,7 +205,7 @@ public class GameSpace extends BasicGame
             	ball.Reset();
             	player.Reset();
             }
-    		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
+    		if (Xpos>600 && Xpos<1228 && Ypos>550 && Ypos<720 && mouseClicked(0)){
     			score.Reset();
     			level = 0;
             	life.Reset();
@@ -254,13 +257,17 @@ public class GameSpace extends BasicGame
 			level_0_backgroundImg.draw(0,0);
 			
 			life.Display(900, 5);
-			score.Display(100,0);
-			//render bricks
+
+
+			score.Display(190,5);
+			scoreWord.draw(90,5);
+
 			for(int i = 0 ; i<bricks.length; i++)
 				bricks[i].Display(brickTexture);
 			
 			g.setColor(Color.white);
 			g.drawRect(player.GetX() , player.GetY(), player.GetLength() , player.GetWidth());
+			playerSkin.draw(player.GetX(), player.GetY());
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			
@@ -271,8 +278,9 @@ public class GameSpace extends BasicGame
 			 level_0_backgroundImg.draw(0,0);
 
 			//Display score images and lose life images
-			 score.Display(100,0);
 			 life.Display(900, 5);
+				score.Display(190,5);
+				scoreWord.draw(90,5);
 			 
 				if(timer.delay==3){
 					secondsCountingImg[2].draw(0,0);
@@ -297,7 +305,7 @@ public class GameSpace extends BasicGame
 		 else if(level==4){
 			 level_0_backgroundImg.draw(0,0);
 			 level_4_backgroundImg.draw(0,0);
-			 score.Display(630,265);
+			 score.Display(510,385);
 			 
 		 }
 		 //this level will load up if player won the game
