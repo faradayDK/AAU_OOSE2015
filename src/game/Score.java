@@ -5,13 +5,21 @@ import org.newdawn.slick.SlickException;
 
 
 public class Score {
-
+	
+	//We display score in 4 digits, each digit stores the info about which number to show
 	private int [] scoreDisplayNumber = new int [4];
+	//Initial score
 	private int score = 0;
+	//Used to calculate numbers for the [] scoreDisplayNumber
 	private int scoreCountingModulo = score;
+	//Array stores the images that should be displayed in each of the 4 score-digits
 	private Image [] scoreDisplayImg = new Image[4];
+	//Array stores images for all digits : 0 1 2 3 4 5 6 7 8 9
 	private static Image [] scoreAllImg = new Image[10];
 	
+	/**
+	 * Constructor for the score 
+	 */
 	public Score(){
 		//assign images for each score
 		for(int i = 0; i < scoreAllImg.length; i++)
