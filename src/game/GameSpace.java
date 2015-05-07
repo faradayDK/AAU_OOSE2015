@@ -42,13 +42,7 @@ public class GameSpace extends BasicGame
 	
 	public boolean pressed= false;
 	
-	
-	//images to display score
-	private Image [] scoreDisplayImg = new Image[4];
-	//Number to display score
-	public int [] scoreDisplayNumber = new int[4];
-	//total score number
-	public int score = 0; 
+	public Score score;
 	
 	
 	private Image [] scoreImg = new Image[10];
@@ -71,21 +65,7 @@ public class GameSpace extends BasicGame
 		ball = new Ball(400,400);
 		player = new Player(2.0f , (int)(spaceWidth /2) , 120 , 20);
 		timer = new Timer(50,3);
-	
-		
-		//assign images for each score
-		for(int i = 0; i < scoreImg.length; i++)
-			scoreImg[i] = new Image("/img/" + i + ".png");
-		
-		//Number that will be displayed
-		for(int i = 0 ; i < scoreDisplayNumber.length ; i++)
-			scoreDisplayNumber[i] = 0;
-		
-		//Assign 0th images to all score images
-		for ( int i = 0 ; i < scoreDisplayImg.length ; i++)
-			scoreDisplayImg[i] = scoreImg[0];
-		
-		
+		score = new Score();
 		
 		//import images for main menu
 	
@@ -146,7 +126,8 @@ public class GameSpace extends BasicGame
         		if(intr.collisionBallBrick(ball, bricks[j]) && !bricks[j].GetDestroyed()){
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
-        		scoreCounter();
+        		//scoreCounter();
+        		score.AddScore();
         		}
         	}
         	if(ball.GetY()>700){
@@ -232,16 +213,13 @@ public class GameSpace extends BasicGame
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			
 	
-			//Display score images
-			for(int i = 0 ; i<scoreDisplayImg.length; i++)
-			scoreDisplayImg[i].draw(i*50,0);
+			score.DisplayScore();
 		}
 		 else if(level ==2){
 			 back.draw(0,0);
 
 				//Display score images and lose life images
-				for(int i = 0 ; i<scoreDisplayImg.length; i++)
-				scoreDisplayImg[i].draw(i*50,0);		
+			 score.DisplayScore();
 				if(timer.delay==3){
 					loseLife[2].draw(0,0);
 					timer.timerStart();
@@ -283,32 +261,6 @@ public class GameSpace extends BasicGame
 		return pressed;
 	}
 	
-	
-	public void scoreCounter() {
-		score++;
-		int FalseScore = score;
-		if(FalseScore>999){
-			scoreDisplayNumber[0]  = (int)(FalseScore/1000);
-			FalseScore = FalseScore - 1000*scoreDisplayNumber[0];
-		}
-		if (FalseScore>99){
-			scoreDisplayNumber[1]  = (int)(FalseScore/100);
-			FalseScore = FalseScore - 100*scoreDisplayNumber[1] ;
-		}
-		if(FalseScore>9){
-			scoreDisplayNumber[2]  = (int)(FalseScore/10);
-			FalseScore = FalseScore - 10*scoreDisplayNumber[2] ;
-		}
-		if (FalseScore<10){
-			scoreDisplayNumber[3]  = FalseScore;
-		}
-		
-		//DISPLAY SCORES
-		for( int i = 0 ; i < scoreDisplayImg.length ; i++)
-		scoreDisplayImg[i] = scoreImg[scoreDisplayNumber[i]];
-			
-
-	}
 	public void resetLevel(){
 	level = 1;
 		
