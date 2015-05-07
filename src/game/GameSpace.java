@@ -1,8 +1,8 @@
 package game;
-import java.awt.event.*;
+//import java.awt.event.*;
 //import java.awt.image.BufferedImage;
 //import java.io.File;
-import java.io.InputStream;
+//import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,7 +40,7 @@ public class GameSpace extends BasicGame
 	public static int spaceWidth = 1280;
 	
 	
-	public boolean Pressed= false;
+	public boolean pressed= false;
 	
 	
 	//images to display score
@@ -50,7 +50,6 @@ public class GameSpace extends BasicGame
 	//total score number
 	public int score = 0; 
 	
-	public boolean hit4score = false;
 	
 	private Image [] scoreImg = new Image[10];
 	public int level = 0;
@@ -86,8 +85,6 @@ public class GameSpace extends BasicGame
 		for ( int i = 0 ; i < scoreDisplayImg.length ; i++)
 			scoreDisplayImg[i] = scoreImg[0];
 		
-		//create grid of bricks
-
 		
 		
 		//import images for main menu

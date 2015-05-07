@@ -12,7 +12,7 @@ public class Brick
 	private boolean destroyed;
 	
 	/**
-	 * Create a brick
+	 * Constructor for the single brick object
 	 * @param type set the type (1 for glass, 2 for wood , 3 for metal)
 	 * @param x X coordinate for the top-right corner
 	 * @param y Y coordinate for the top-right corner
@@ -28,6 +28,13 @@ public class Brick
 		this.destroyed = false;
 	}
 	
+	/**
+	 * Method for assigning coordinates and types for bricks
+	 * @param amount is the amount of bricks that need to be created
+	 * @param startX is the coordinate on X-axis, where the first brick is going to be created
+	 * @param startY is the coordinate on Y-axis, where the first brick is going to be created
+	 * @return the array of bricks. Each brick has its own location and type.
+	 */
 	public static Brick[] Spawn (int amount, float startX, float startY){
 		
 		Brick[] bricks = new Brick[amount];
@@ -68,6 +75,7 @@ public class Brick
 	{
 		return this.y;
 	}
+	
 	/**
 	 * Get the length of the brick
 	 * Returns the float
@@ -85,19 +93,13 @@ public class Brick
 		return width;
 	}
 	
-	
 	/**
 	 * Get the type
-	 * Returns the int
+	 * Returns the integer that represents the type of a brick
 	 */
 	public int GetType()
 	{
 		return this.type;
-	}
-	
-	public int GetLife()
-	{
-		return this.lives;
 	}
 	
 	public boolean GetDestroyed(){
@@ -111,6 +113,7 @@ public class Brick
 		}
 		type = lives;
 	}
+	
 	public void ReduceLife(){
 		this.lives --;
 		checkLife();
