@@ -7,6 +7,7 @@ public class Player {
 	public float speed;
 	public int length;
 	public int width;
+	public float initialPosition;
 	
 	private int color;
 	private float speedConstant;
@@ -20,6 +21,7 @@ public class Player {
 		this.length = length;
 		this.width = width;
 		this.speedConstant = speed;
+		this.initialPosition =position;
 	
 	}
 	
@@ -54,6 +56,9 @@ public class Player {
 	private void checkSpeed(){
 		if(speed + 0.005f < 12.0f)
 		speed =speed+ 0.8f;
+	}
+	public void ResetPlayer(){
+		positionX = initialPosition;
 	}
 	
 	public float GetY()

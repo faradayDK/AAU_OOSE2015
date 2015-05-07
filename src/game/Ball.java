@@ -6,7 +6,7 @@ public class Ball {
 	public boolean fliesDown  = true;
 	public float leftBorder = 100.0f;
 	public float rightBorder = 1120.0f;
-	public int ballChange = 5;
+	public int ballChange = 15;
 	public float angleRatio = 2.0f;	
 	public float makeBallFlySlower =0.0f;
 	public float ballYSpeed = 2.0f;
@@ -56,13 +56,13 @@ public class Ball {
 	// Both BallAngle1 and BallAngle2 work as physics for the ball. 
 	public void BallAngle1(Player player){
 		if(fliesRight ==true){
-			angleRatio = Math.abs(angleRatio-player.speed/ballChange);
+			angleRatio = Math.abs(angleRatio-((player.speed)*2)/ballChange);
 			if( (angleRatio-player.speed/ballChange)<0){
 				fliesRight =false;
 			}
 		}
 		else{
-			angleRatio = angleRatio+player.speed/ballChange;
+			angleRatio = angleRatio+((player.speed)*2)/ballChange;
 		}
 	}
 	public void BallAngle2(Player player){
@@ -100,8 +100,8 @@ public class Ball {
 	public void BallAcceleration(){
 		if (ballAcceleration<6.0f)
 		ballAcceleration = ballAcceleration+0.001f;
-		if(ballAcceleration>=5.9f && ballAcceleration<10.0f)
-			ballAcceleration = ballAcceleration+0.0015f;
+		if(ballAcceleration>6.0f)
+			ballAcceleration = 6.0f;
 	}
 	
 	public boolean collision(Player player){
