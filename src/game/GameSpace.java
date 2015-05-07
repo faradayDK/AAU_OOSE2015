@@ -14,10 +14,8 @@ import org.newdawn.slick.Color;
 
 
 //Package "Basic Game" for 2D game development
-
 public class GameSpace extends BasicGame
 {
-
 	//Global variables for bricks
 	int bricks_Amount = 80;
 	int bricks_StartX = 100;
@@ -36,21 +34,23 @@ public class GameSpace extends BasicGame
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
 	public boolean pressed = false;
+	
+	//initial level is 0 -> Main menu
 	public int level = 0;
 	int Xpos, Ypos;
 
+	//Images for the levels's backgrounds
 	private Image level_0_NewGame, level_0_exit,
 	level_0_backgroundImg, level_1_backgroundImg, 
 	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
+	//Images for the bricks -> each image correspond to the specific type of brick
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
-	
 	
 	public GameSpace(String gameName)
 	{
 		super(gameName);
 	}
-	
 	
 	@Override
 	public void init(GameContainer gc) throws SlickException
@@ -62,8 +62,7 @@ public class GameSpace extends BasicGame
 		score = new Score();
 		life = new Life();
 		
-		//import images for main menu
-	
+		//import images for different levels
 		level_0_NewGame = new Image("/img/NewGame.png");
 		level_0_exit = new Image("/img/exit.png");
 		level_0_backgroundImg = new Image("/img/back.jpg");
@@ -72,8 +71,6 @@ public class GameSpace extends BasicGame
 		level_4_backgroundImg = new Image("/img/ifLost.png");
 		level_5_backgroundImg = new Image("/img/ifWinner.png");
 		
-		
-		
 		//Assign images for the 
 		for (int i =0; i<secondsCountingImg.length; i++)
 			secondsCountingImg[i] = new Image("img/lost"+ (i+1) +".png");
@@ -81,25 +78,22 @@ public class GameSpace extends BasicGame
 		//Assign textures for the brick types
 		for(int i = 0 ; i < brickTexture.length; i++)
 			brickTexture[i] = new Image("/img/"+"brick" + (brickTexture.length - i) + ".png");
-		
-
-
 	}
+	
 	public void update(GameContainer gc, int delta) throws SlickException {
 		//this code will run if the level equals to 0 (Main menu)
 		 if (level == 0) {
 	        	//change levels by clicking on menu
-	    		
 	    		Xpos = Mouse.getX();
 	    		//use to solve upwards problem!
 	    		Ypos = spaceHeight - Mouse.getY();
 	    	
-	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0)){
+	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;
 	    				
 	    		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
 	    						System.exit(0);
-	            }
+	            
 	        }
 		
 		//the following code will be running if the level is equal to 1. (Game process)
@@ -214,9 +208,12 @@ public class GameSpace extends BasicGame
     		}
 			
 		}
+		//Used to store the amount of destroyed bricks
 		int destroyedBricks = 0;
+		//Counts destroyed bricks
 		for(int i = 0 ; i < bricks.length ; i++)
 			if(bricks[i].GetDestroyed()) destroyedBricks++;
+		//if destroyed bricks are equal to the initial brick amount -> user win!
 		if(destroyedBricks == bricks_Amount){
 			level = 5;
 		}
@@ -228,22 +225,25 @@ public class GameSpace extends BasicGame
 			 timer.resetDelay();
 			 //ball.ResetBallAcceleration();
 		 }
+        //If user doesn't have any lives
         if (life.Get() == 0){
+        	//level 4 - > loose
         	level = 4;
+        	//reset all the objects
         	life.Reset();
         	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
         	ball.Reset();
         	player.Reset();
-        	//score.Reset();
+        	score.Reset();
         }   
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
+		//level 0 -> Main menu
 		 if (level == 0) {
-			//render main menu
-		
+			//render main menu		
 			level_1_backgroundImg.draw(0,0);
 			level_0_NewGame.draw(100,100);
 			level_0_exit.draw(100,400);
@@ -252,15 +252,23 @@ public class GameSpace extends BasicGame
 		 //render the game
 
 		 else if(level == 1) {
+			 //background renderer
 			level_0_backgroundImg.draw(0,0);
 			
+			//object display
 			life.Display(900, 5);
 			score.Display(100,5);
+			player.Display();
 
+			/*
+			 * Displays all the bricks, that are not destroyed,
+			 * uses Image [] brickTexture,
+			 * each texture correspond to the certain type of a brick
+			 */
 			for(int i = 0 ; i<bricks.length; i++)
 				bricks[i].Display(brickTexture);
-			
-			player.Display();
+		
+			//Draw the ball
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			
@@ -320,6 +328,7 @@ public class GameSpace extends BasicGame
 				appgc = new AppGameContainer(new GameSpace("Breakout"));
 				appgc.setDisplayMode(spaceWidth, spaceHeight , false);
 				appgc.setVSync(true);
+				//Set the maximum frame rate 60, so the game works on different computers with same speed
 				appgc.setMaximumLogicUpdateInterval(60);
 		        appgc.setMinimumLogicUpdateInterval(1);
 				appgc.start();
@@ -330,7 +339,7 @@ public class GameSpace extends BasicGame
 			}
 		}
 
-	//method for getting input from mouse
+	//Function that checks whether the mouse was pressed
 	public boolean mouseClicked(int button){
 		boolean pressed = Mouse.isButtonDown(button);
 		return pressed;
