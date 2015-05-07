@@ -82,4 +82,8 @@ public class Ball {
 			fliesRight =false;
 		}
 	}
+	public void resetBall(){
+		this.x = 400;
+		this.y = 400;
+	}
 }
