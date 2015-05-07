@@ -300,7 +300,7 @@ public class GameSpace extends BasicGame
 			 life.Display(900, 5);
 			 score.Display(100,5);
 			 
-			 	// this code follows the timer, and with every decadence of delay variable, it shows picture.
+			 	// this code follows the timer, and with every decadence of delay variable, it shows pictures
 				if(timer.delay==3){
 					secondsCountingImg[2].draw(0,0);
 					timer.Start();
