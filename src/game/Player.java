@@ -1,5 +1,8 @@
 package game;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 public class Player {
 	
 	//The position of player on x-axis
@@ -13,6 +16,8 @@ public class Player {
 	public float initialPosition;
 	//As the player increases the speed in some conditions, we need to reset it sometimes
 	private float speedConstant;
+	//Image for the player
+	private Image playerImg;
 	
 	/**
 	 * Constructor for the player object
@@ -21,7 +26,8 @@ public class Player {
 	 * @param length -> the length of the player
 	 * @param width -> the width of the player
 	 */
-	public Player(float speed, float position, int length, int width) {
+	public Player(float speed, float position, int length, int width) 
+	{
 		
 		this.speed = speed;
 		//X coordinate of the player
@@ -35,6 +41,13 @@ public class Player {
 		 * the player is going to spawn on the initialPosition
 		*/
 		this.initialPosition = position;
+		
+		//Assign image for the player, if not find, it will print out the error
+		try {
+			playerImg = new  Image("/img/PlayerSkin.png");
+		} catch (SlickException e) {
+			System.out.println("/img/PlayerSkin.png cannot be found");
+		}
 	
 	}
 	
@@ -43,7 +56,8 @@ public class Player {
 	 * while player holds the button -> speed grows (checkSpeed())
 	 * also if player hit the wall, he stops to move
 	 */
-	public void moveLeft() {
+	public void moveLeft()
+	{
 		checkSpeed();
 	    positionX-=speed; 
 	    checkBorders();
@@ -52,7 +66,8 @@ public class Player {
 	/**
 	 * Same as for the previous method
 	 */
-	public void moveRight(){
+	public void moveRight()
+	{
 		checkSpeed();
 	    positionX+=speed;
 	    checkBorders();
@@ -62,7 +77,8 @@ public class Player {
 	/**
 	 * Method to check whether the player hits the wall
 	 */
-	private void checkBorders(){
+	private void checkBorders()
+	{
 		if (positionX<93){
 			positionX = 93;
 		}
@@ -74,7 +90,8 @@ public class Player {
 	/**
 	 * When player releases the button, speed resets
 	 */
-	public void resetSpeed(){
+	public void resetSpeed()
+	{
 		speed = speedConstant;
 	}
 	
@@ -82,7 +99,8 @@ public class Player {
 	 * While the player object is moving, the speed is rising.
 	 * This, the longer player holds buttons (moves object), the faster is moves
 	 */
-	private void checkSpeed(){
+	private void checkSpeed()
+	{
 		if(speed + 0.005f < 12.0f)
 		speed =speed+ 0.8f;
 	}
@@ -90,7 +108,8 @@ public class Player {
 	/**
 	 * Put player object on the initial position
 	 */
-	public void Reset(){
+	public void Reset()
+	{
 		positionX = initialPosition;
 	}
 	
@@ -129,7 +148,13 @@ public class Player {
 	/**
 	 * @return the current speed of the player object
 	 */
-	public float GetSpeed(){
+	public float GetSpeed()
+	{
 		return this.speed;
+	}
+	
+	public void Display(){
+		playerImg.draw(this.positionX, this.positionY);
+		
 	}
 }

@@ -41,7 +41,7 @@ public class GameSpace extends BasicGame
 
 	private Image level_0_NewGame, level_0_exit,
 	level_0_backgroundImg, level_1_backgroundImg, 
-	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg, playerSkin, scoreWord;
+	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -70,10 +70,7 @@ public class GameSpace extends BasicGame
 		level_1_backgroundImg = new Image("/img/back1.jpg");
 		level_3_backgroundImg = new Image("/img/ifPause.png");
 		level_4_backgroundImg = new Image("/img/ifLost.png");
-		level_5_backgroundImg = new Image("/img/ifWinner.png");
-		playerSkin = new  Image("/img/PlayerSkin.png");
-		scoreWord = new Image("/img/ScoreWord.png");
-		
+		level_5_backgroundImg = new Image("/img/ifWinner.png");		
 		
 		
 		//Assign images for the 
@@ -256,14 +253,12 @@ public class GameSpace extends BasicGame
 			level_0_backgroundImg.draw(0,0);
 			
 			life.Display(900, 5);
-			score.Display(190,5);
-			scoreWord.draw(90,5);
+			score.Display(100,5);
 			for(int i = 0 ; i<bricks.length; i++)
 				bricks[i].Display(brickTexture);
 			
-			g.setColor(Color.white);
-			g.drawRect(player.GetX() , player.GetY(), player.GetLength() , player.GetWidth());
-			playerSkin.draw(player.GetX(), player.GetY());
+			player.Display();
+			
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			
@@ -275,9 +270,7 @@ public class GameSpace extends BasicGame
 
 			//Display score images and lose life images
 			 life.Display(900, 5);
-				score.Display(190,5);
-				scoreWord.draw(90,5);
-			 
+				score.Display(100,5);			 
 				if(timer.delay==3){
 					secondsCountingImg[2].draw(0,0);
 					timer.Start();

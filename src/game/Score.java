@@ -16,24 +16,32 @@ public class Score {
 	private Image [] scoreDisplayImg = new Image[4];
 	//Array stores images for all digits : 0 1 2 3 4 5 6 7 8 9
 	private static Image [] scoreAllImg = new Image[10];
+	//Image for the score word
+	private static Image scoreWord;
 	
 	/**
 	 * Constructor for the score 
 	 */
 	public Score(){
-		//assign images for each score
+		//assign images for each digit, in case, it cannot find a file, it will write the message
 		for(int i = 0; i < scoreAllImg.length; i++)
 			try {
 				scoreAllImg[i] = new Image("/img/" + i + ".png");
 			} catch (SlickException e) {
 				System.out.println("/img/" + i + ".png cannot be found");
 			}
+		//assign image for the socre word
+		try {
+			scoreWord = new Image("/img/ScoreWord.png");
+		} catch (SlickException e) {
+			System.out.println("/img/ScoreWord.png cannot be found");
+		}
 		
-		//Number that will be displayed
+		//Number that will be displayed , as starting score is 0 -> all digits are onna be 0
 		for(int i = 0 ; i < scoreDisplayNumber.length ; i++)
 			scoreDisplayNumber[i] = 0;
 		
-		//Assign 0th images to all score images
+		//Assign 0th images to 4-score-digits
 		for ( int i = 0 ; i < scoreDisplayImg.length ; i++)
 			scoreDisplayImg[i] = scoreAllImg[0];
 	}
@@ -62,8 +70,9 @@ public class Score {
 	
 	
 	public void Display(float startX, float startY){
+		scoreWord.draw(startX, startY);
 		for(int i = 0 ; i<scoreDisplayImg.length; i++)
-		scoreDisplayImg[i].draw(startX+(i*50),startY);
+		scoreDisplayImg[i].draw(startX + 100 +(i*50),startY);
 	}
 	
 	public void Reset(){
