@@ -263,8 +263,6 @@ public class GameSpace extends BasicGame
 			for(int i = 0 ; i<bricks.length; i++)
 				bricks[i].Display(brickTexture);
 			
-			g.setColor(Color.white);
-			g.drawRect(player.GetX() , player.GetY(), player.GetLength() , player.GetWidth());
 			playerSkin.draw(player.GetX(), player.GetY());
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);

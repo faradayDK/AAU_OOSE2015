@@ -17,9 +17,7 @@ public class Score {
 	//Array stores images for all digits : 0 1 2 3 4 5 6 7 8 9
 	private static Image [] scoreAllImg = new Image[10];
 	private static Image scoreWord;
-	
-	private static Image scoreWord;
-	
+		
 	/**
 	 * Constructor for the score 
 	 */
