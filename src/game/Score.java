@@ -80,8 +80,16 @@ public class Score {
 	}
 	
 	public void Reset(){
-		score = -1;
-		Add();
+		//Initial score
+		score = 0 ;
+		//We need to update each digit -> tell it that now score is eqal to 0
+		//Number that will be displayed
+		for(int i = 0 ; i < scoreDisplayNumber.length ; i++)
+			scoreDisplayNumber[i] = 0;
+		
+		//Assign 0th images to all score images
+		for ( int i = 0 ; i < scoreDisplayImg.length ; i++)
+			scoreDisplayImg[i] = scoreAllImg[0];
 		
 
 		
