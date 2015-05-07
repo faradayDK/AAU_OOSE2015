@@ -93,8 +93,8 @@ public class GameSpace extends BasicGame
 		back = new org.newdawn.slick.Image("/img/back.jpg");
 		back1 = new org.newdawn.slick.Image("/img/back1.jpg");
 		//import images for brick textures
-		for(int i = 0; i < brickTex.length; i++)
-			brickTex[i] = new org.newdawn.slick.Image("/img/"+"brick" + (i + 1) + ".png");
+		for(int i = 0 ; i < brickTex.length; i++)
+			brickTex[i] = new org.newdawn.slick.Image("/img/"+"brick" + (brickTex.length - i) + ".png");
 		
 
 
