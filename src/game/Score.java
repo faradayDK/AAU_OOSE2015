@@ -53,6 +53,7 @@ public class Score {
 	 * Increase score by certain value
 	 * @param add -> add to the score
 	 */
+	//
 	public void Add(int add){
 		//increase score
 		score += add;
