@@ -175,20 +175,23 @@ public class GameSpace extends BasicGame
 			Xpos = Mouse.getX();
     		Ypos = spaceHeight - Mouse.getY();
             if(Xpos>0 && Xpos<600 && Ypos>550 && Ypos<720 && mouseClicked(0)){
-            	score.Reset();
-    			level = 1;
+            	
+    			
             	life.Reset();
             	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
             	ball.Reset();
             	player.Reset();
+            	score.Reset();
+            	level = 1;
             }
     		if (Xpos>600 && Xpos<1228 && Ypos>550 && Ypos<720 && mouseClicked(0)){
-    			score.Reset();
+    			
     			level = 0;
             	life.Reset();
             	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
             	ball.Reset();
             	player.Reset();
+            	score.Reset();
             	
     		}
 			
