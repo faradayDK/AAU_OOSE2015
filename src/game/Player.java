@@ -1,4 +1,6 @@
 package game;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Player {
 	
@@ -13,6 +15,8 @@ public class Player {
 	public float initialPosition;
 	//As the player increases the speed in some conditions, we need to reset it sometimes
 	private float speedConstant;
+	//Player texture
+	private Image playerImg;
 	
 	/**
 	 * Constructor for the player object
@@ -35,7 +39,12 @@ public class Player {
 		 * the player is going to spawn on the initialPosition
 		*/
 		this.initialPosition = position;
-	
+		
+		try {
+			playerImg = new Image("/img/PlayerSkin.png");
+		} catch (SlickException e) {
+			System.out.println("/img/PlayerSkin.png cannot be found");
+		}
 	}
 	
 	/**
@@ -131,5 +140,11 @@ public class Player {
 	 */
 	public float GetSpeed(){
 		return this.speed;
+	}
+	
+	public void Display()
+	{
+		playerImg.draw(this.positionX, this.positionY);
+		
 	}
 }
