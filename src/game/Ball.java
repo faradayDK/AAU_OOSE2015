@@ -103,4 +103,28 @@ public class Ball {
 		if(ballAcceleration>=5.9f && ballAcceleration<10.0f)
 			ballAcceleration = ballAcceleration+0.0015f;
 	}
+	
+	public boolean collision(Player player){
+		
+		if(this.x > player.GetX()-5 && this.x < (player.GetX() + player.GetLength()+5)){
+			if(this.y > player.GetY() && this.y < (player.GetY() + player.GetWidth())){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean collision(Brick brick){
+		
+		float correction = 1.5f;
+		if(this.x + correction > brick.GetX() - correction && this.x - correction < (brick.GetX() + brick.GetWidth() + correction)){
+			if(this.y + correction > brick.GetY() - correction && this.y - correction  < (brick.GetY() + brick.GetHeight() + correction)){
+				if(!brick.GetDestroyed())
+					return true;
+			}
+		}
+		
+		return false;
+	}
 }
