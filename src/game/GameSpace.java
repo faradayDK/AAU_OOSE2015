@@ -1,11 +1,6 @@
 package game;
-//import java.awt.event.*;
-//import java.awt.image.BufferedImage;
-//import java.io.File;
-//import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
@@ -24,11 +19,16 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables for bricks
-	public Brick [] bricks = Brick.Spawn(90, 100, 50);
+	int bricks_Amount = 90;
+	int bricks_StartX = 100;
+	int bricks_StartY = 50;
+	public Brick [] bricks = Brick.Spawn(bricks_Amount, bricks_StartX, bricks_StartY);
+	
 	//create ball and player object
 	public Ball ball;
 	public Player player;
 	public Timer timer;
+	public Score score;
 	
 	public int lives = 3;
 	//Setup for the screen size
@@ -38,14 +38,14 @@ public class GameSpace extends BasicGame
 	
 	public boolean pressed= false;
 	
-	public Score score;
 	
 	
 	public int level = 0;
 	int Xpos, Ypos;
-	private Image level1, exit, back, back1, livesWord, life;
+	private Image level_0_NewGame, level_0_exit, level_0_backgroundImg, level_1_backgroundImg, level_1_lifeString, level_1_lifeImg;
 	private Image [] brickTex = new Image[3];
-	private Image[] loseLife = new Image[3];
+	private Image[] secondsCountingImg = new Image[3];
+	
 	
 	public GameSpace(String gameName)
 	{
@@ -64,15 +64,15 @@ public class GameSpace extends BasicGame
 		
 		//import images for main menu
 	
-		level1 = new Image("/img/NewGame.png");
-		exit = new Image("/img/exit.png");
-		back = new Image("/img/back.jpg");
-		back1 = new Image("/img/back1.jpg");
-		livesWord = new Image("img/LivesWord.png");
-		life = new Image("img/Life.png");
+		level_0_NewGame = new Image("/img/NewGame.png");
+		level_0_exit = new Image("/img/exit.png");
+		level_0_backgroundImg = new Image("/img/back.jpg");
+		level_1_backgroundImg = new Image("/img/back1.jpg");
+		level_1_lifeString = new Image("img/LivesWord.png");
+		level_1_lifeImg = new Image("img/Life.png");
 		
-		for (int i =0; i<loseLife.length; i++)
-			loseLife[i] = new Image("img/lost"+ (i+1) +".png");
+		for (int i =0; i<secondsCountingImg.length; i++)
+			secondsCountingImg[i] = new Image("img/lost"+ (i+1) +".png");
 		
 		//import images for brick textures
 
@@ -84,7 +84,7 @@ public class GameSpace extends BasicGame
 	}
 	public void update(GameContainer gc, int delta) throws SlickException {
 		
-		System.out.println(ball.ballAcceleration);
+		//System.out.println(ball.ballAcceleration);
 		//If game level
 		if(level == 1){
 			ball.MoveBall();
@@ -137,9 +137,11 @@ public class GameSpace extends BasicGame
 			 level = 1;
 			 timer.resetDelay();
 		 }
+        
         if (lives== 0){
         	level = 0;
         	lives = 3;
+        	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
         	ball.resetBall();
         	
         	
@@ -168,30 +170,19 @@ public class GameSpace extends BasicGame
 		 if (level == 0) {
 			//render main menu
 		
-			back1.draw(0,0);
-			level1.draw(100,100);
-			exit.draw(100,400);
+			level_1_backgroundImg.draw(0,0);
+			level_0_NewGame.draw(100,100);
+			level_0_exit.draw(100,400);
 			
 		 }
 
 		 else if(level == 1) {
-			back.draw(0,0);
-			livesWord.draw(900,8);
-			if(lives == 3){
-				life.draw(980,5);
-				life.draw(1020,5);
-				life.draw(1060,5);
-				
-			}
-			if (lives ==2){
-				life.draw(1020,5);
-				life.draw(1060,5);
-				
-			}
-			if (lives ==1){
-				life.draw(1060,5);
-				
-			}
+			level_0_backgroundImg.draw(0,0);
+			level_1_lifeString.draw(900,8);
+			
+			for(int i = 0 ; i < lives ; i++)
+				level_1_lifeImg.draw(980 + (i * 40),5);
+
 			
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
@@ -201,7 +192,7 @@ public class GameSpace extends BasicGame
 			}
 			
 			g.setColor(Color.white);
-			g.drawRect(player.GetX() , spaceHeight - 100, player.length , player.width);
+			g.drawRect(player.GetX() , spaceHeight - 100, player.GetLength() , player.GetWidth());
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			
@@ -209,21 +200,22 @@ public class GameSpace extends BasicGame
 			score.DisplayScore();
 		}
 		 else if(level ==2){
-			 back.draw(0,0);
+			 level_0_backgroundImg.draw(0,0);
 
-				//Display score images and lose life images
+			//Display score images and lose life images
 			 score.DisplayScore();
+			 
 				if(timer.delay==3){
-					loseLife[2].draw(0,0);
-					timer.timerStart();
+					secondsCountingImg[2].draw(0,0);
+					timer.Start();
 				}
 				if (timer.delay ==2){
-					loseLife[1].draw(0,0);
-					timer.timerStart();
+					secondsCountingImg[1].draw(0,0);
+					timer.Start();
 				}
 				if(timer.delay == 1){
-					loseLife[0].draw(0,0);
-					timer.timerStart();
+					secondsCountingImg[0].draw(0,0);
+					timer.Start();
 				}
 		 } 
 	}

@@ -12,7 +12,7 @@ public class Timer {
 		this.delay2 = delay;
 	}
 
-	public void timerStart(){
+	public void Start(){
 		 if(time>0){
 			 time--;
 		 }

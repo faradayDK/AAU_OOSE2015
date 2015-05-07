@@ -119,6 +119,10 @@ public class Brick
 		checkLife();
 	}
 	
+	public static Brick [] Reset(int amount, int startX, int startY){
+		return Spawn( amount,  startX , startY);
+	}
+	
 
 	
 }

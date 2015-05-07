@@ -108,6 +108,7 @@ public class Ball {
 		
 		if(this.x > player.GetX()-5 && this.x < (player.GetX() + player.GetLength()+5)){
 			if(this.y > player.GetY() && this.y < (player.GetY() + player.GetWidth())){
+				this.y -=5;
 				return true;
 			}
 		}

@@ -1,17 +1,12 @@
 package game;
-import org.newdawn.slick.Input;
 
 public class Player {
-	public float positionX;
+	private float positionX;
 	private float positionY = 600;
 	public float speed;
-	public int length;
-	public int width;
-	
-	private int color;
+	private int length;
+	private int width;
 	private float speedConstant;
-
-	
 	
 	public Player(float speed, float position, int length, int width) {
 		
@@ -72,5 +67,8 @@ public class Player {
 	public float GetLength()
 	{
 		return this.length;
+	}
+	public float GetSpeed(){
+		return this.speed;
 	}
 }
