@@ -1,4 +1,5 @@
 package game;
+import org.newdawn.slick.Image;
 
 public class Brick 
 {
@@ -121,6 +122,12 @@ public class Brick
 	
 	public static Brick [] Reset(int amount, int startX, int startY){
 		return Spawn( amount,  startX , startY);
+	}
+	
+	public void Display(Image [] texture){
+		if(!destroyed)
+		texture[this.type-1].draw(this.x, this.y);
+
 	}
 	
 

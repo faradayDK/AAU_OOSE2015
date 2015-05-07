@@ -53,7 +53,7 @@ public class Player {
 		if(speed + 0.005f < 12.0f)
 		speed =speed+ 0.8f;
 	}
-	public void ResetPlayer(){
+	public void Reset(){
 		positionX = initialPosition;
 	}
 	

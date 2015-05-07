@@ -86,7 +86,7 @@ public class Ball {
 			fliesRight =false;
 		}
 	}
-	public void resetBall(){
+	public void Reset(){
 		this.x = 400;
 		this.y = 400;
 		fliesRight = true;
@@ -104,7 +104,7 @@ public class Ball {
 			ballAcceleration = 6.0f;
 	}
 	
-	public boolean collision(Player player){
+	public boolean Collision(Player player){
 		
 		if(this.x > player.GetX()-5 && this.x < (player.GetX() + player.GetLength()+5)){
 			if(this.y > player.GetY() && this.y < (player.GetY() + player.GetWidth())){
@@ -116,7 +116,7 @@ public class Ball {
 		return false;
 	}
 	
-	public boolean collision(Brick brick){
+	public boolean Collision(Brick brick){
 		
 		float correction = 1.5f;
 		if(this.x + correction > brick.GetX() - correction && this.x - correction < (brick.GetX() + brick.GetWidth() + correction)){

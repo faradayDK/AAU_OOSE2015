@@ -32,7 +32,7 @@ public class Score {
 	}
 	
 	
-	public void AddScore(){
+	public void Add(){
 		score++;
 		
 		scoreCountingModulo = score;
@@ -57,12 +57,12 @@ public class Score {
 	}
 	
 	
-	public void DisplayScore(){
+	public void Display(){
 		for(int i = 0 ; i<scoreDisplayImg.length; i++)
 		scoreDisplayImg[i].draw(100+(i*50),0);
 	}
 	
-	public void ResetScore(){
+	public void Reset(){
 		score = 0;
 	}
 }

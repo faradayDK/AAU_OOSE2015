@@ -29,6 +29,7 @@ public class GameSpace extends BasicGame
 	public Player player;
 	public Timer timer;
 	public Score score;
+	public Life life;
 	
 	public int lives = 3;
 	//Setup for the screen size
@@ -42,7 +43,7 @@ public class GameSpace extends BasicGame
 	
 	public int level = 0;
 	int Xpos, Ypos;
-	private Image level_0_NewGame, level_0_exit, level_0_backgroundImg, level_1_backgroundImg, level_1_lifeString, level_1_lifeImg;
+	private Image level_0_NewGame, level_0_exit, level_0_backgroundImg, level_1_backgroundImg;
 	private Image [] brickTex = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -61,6 +62,7 @@ public class GameSpace extends BasicGame
 		player = new Player(2.0f , (int)(spaceWidth /2) , 120 , 20);
 		timer = new Timer(50,3);
 		score = new Score();
+		life = new Life();
 		
 		//import images for main menu
 	
@@ -68,8 +70,6 @@ public class GameSpace extends BasicGame
 		level_0_exit = new Image("/img/exit.png");
 		level_0_backgroundImg = new Image("/img/back.jpg");
 		level_1_backgroundImg = new Image("/img/back1.jpg");
-		level_1_lifeString = new Image("img/LivesWord.png");
-		level_1_lifeImg = new Image("img/Life.png");
 		
 		for (int i =0; i<secondsCountingImg.length; i++)
 			secondsCountingImg[i] = new Image("img/lost"+ (i+1) +".png");
@@ -84,7 +84,6 @@ public class GameSpace extends BasicGame
 	}
 	public void update(GameContainer gc, int delta) throws SlickException {
 		
-		//System.out.println(ball.ballAcceleration);
 		//If game level
 		if(level == 1){
 			ball.MoveBall();
@@ -101,7 +100,7 @@ public class GameSpace extends BasicGame
 			/////////////////////////////////////////
 			//Collision
        
-        	if(ball.collision(player) ){
+        	if(ball.Collision(player) ){
         		
         		ball.fliesDown = !ball.fliesDown;
         	
@@ -118,34 +117,34 @@ public class GameSpace extends BasicGame
         	/////////////////////////////
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
-        		if(ball.collision(bricks[j])){
+        		if(ball.Collision(bricks[j])){
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
         		//scoreCounter();
-        		score.AddScore();
+        		score.Add();
         		}
         	}
         	if(ball.GetY()>700){
-        		lives--;
-        		level =2;
+        		life.Reduce();
+        		level = 2;
         		
         	}
 		
 		}
         if (timer.delay == 0){
-        	ball.resetBall();
-        	player.ResetPlayer();
+        	ball.Reset();
+        	player.Reset();
 			 level = 1;
 			 timer.resetDelay();
 			 ball.ballAcceleration = ball.ballAcceleration/2;
 		 }
         
-        if (lives== 0){
+        if (life.Get() == 0){
         	level = 0;
-        	lives = 3;
+        	life.Reset();
         	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
-        	ball.resetBall();
-        	player.ResetPlayer();
+        	ball.Reset();
+        	player.Reset();
         	 ball.ballAcceleration = ball.ballAcceleration/2;
         	
         	
@@ -182,32 +181,25 @@ public class GameSpace extends BasicGame
 
 		 else if(level == 1) {
 			level_0_backgroundImg.draw(0,0);
-			level_1_lifeString.draw(900,8);
 			
-			for(int i = 0 ; i < lives ; i++)
-				level_1_lifeImg.draw(980 + (i * 40),5);
-
+			life.Display(900, 5);
+			score.Display();
 			
-			for(int i = 0 ; i<bricks.length; i++){
-				if(!bricks[i].GetDestroyed()){
-					brickTex[bricks[i].GetType()-1].draw(bricks[i].GetX(), bricks[i].GetY());
-
-				}
-			}
+			for(int i = 0 ; i<bricks.length; i++)
+				bricks[i].Display(brickTex);
 			
 			g.setColor(Color.white);
 			g.drawRect(player.GetX() , spaceHeight - 100, player.GetLength() , player.GetWidth());
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			
-	
-			score.DisplayScore();
 		}
 		 else if(level ==2){
 			 level_0_backgroundImg.draw(0,0);
 
 			//Display score images and lose life images
-			 score.DisplayScore();
+			 score.Display();
+			 life.Display(900, 5);
 			 
 				if(timer.delay==3){
 					secondsCountingImg[2].draw(0,0);
