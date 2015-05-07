@@ -49,12 +49,26 @@ public class Score {
 			scoreDisplayImg[i] = scoreAllImg[0];
 	}
 	
-	
-	public void Add(){
-		score++;
+	/**
+	 * Increase score by certain value
+	 * @param add -> add to the score
+	 */
+	public void Add(int add){
+		//increase score
+		score += add;
+		//Variable is used to calculate number for each of the 4-digits
 		scoreCountingModulo = score;
-		//
+		/*This for-loop takes the each of the 4-digit and by dividing 
+		 * the scores by 1000, 100, 10 it calculates how big should be the left-most digit
+		 * then the second digit and so on
+		 *
+		 */
 		for( int i = 0 ; i < scoreDisplayNumber.length; i++){
+			//with a first run the number is going to be 1000,
+			//the second is going to be 100
+			//then 10
+			
+			//
 			int number = (int) Math.pow(10, scoreDisplayNumber.length-1-i);
 			if(number >= 10){
 				if(scoreCountingModulo> number - 1){
@@ -71,17 +85,23 @@ public class Score {
 			scoreDisplayImg[i] = scoreAllImg[scoreDisplayNumber[i]];
 	}
 	
-	
+	/**
+	 * Method to display the score
+	 * @param startX -> the Xcoord
+	 * @param startY -> the Ycoord
+	 */
 	public void Display(float startX, float startY){
 		scoreWord.draw(startX, startY);
 		for(int i = 0 ; i<scoreDisplayImg.length; i++)
 		scoreDisplayImg[i].draw(startX + 100 +(i*30),startY);
 	}
-	
+	/**
+	 * Method for reseting the score and the 4-digits
+	 */
 	public void Reset(){
 		//Initial score
 		score = 0 ;
-		//We need to update each digit -> tell it that now score is eqal to 0
+		//We need to update each digit -> tell it that now score is equal to 0
 		//Number that will be displayed
 		for(int i = 0 ; i < scoreDisplayNumber.length ; i++)
 			scoreDisplayNumber[i] = 0;
