@@ -103,7 +103,8 @@ public class Ball {
 		float correction = 1.5f;
 		if(this.x + correction > brick.GetX() - correction && this.x - correction < (brick.GetX() + brick.GetWidth() + correction)){
 			if(this.y + correction > brick.GetY() - correction && this.y - correction  < (brick.GetY() + brick.GetHeight() + correction)){
-				return true;
+				if(!brick.GetDestroyed())
+					return true;
 			}
 		}
 		

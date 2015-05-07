@@ -41,7 +41,6 @@ public class GameSpace extends BasicGame
 	public Score score;
 	
 	
-	private Image [] scoreImg = new Image[10];
 	public int level = 0;
 	int Xpos, Ypos;
 	private Image level1, exit, back, back1, livesWord, life;
@@ -119,7 +118,7 @@ public class GameSpace extends BasicGame
         	/////////////////////////////
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
-        		if(ball.collision(bricks[j]) && !bricks[j].GetDestroyed()){
+        		if(ball.collision(bricks[j])){
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
         		//scoreCounter();
