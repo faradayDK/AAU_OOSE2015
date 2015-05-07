@@ -33,22 +33,19 @@ public class Score {
 	
 	public void Add(){
 		score++;
-		
 		scoreCountingModulo = score;
-		if(scoreCountingModulo>999){
-			scoreDisplayNumber[0]  = (int)(scoreCountingModulo/1000);
-			scoreCountingModulo = scoreCountingModulo - 1000*scoreDisplayNumber[0];
-		}
-		if (scoreCountingModulo>99){
-			scoreDisplayNumber[1]  = (int)(scoreCountingModulo/100);
-			scoreCountingModulo = scoreCountingModulo - 100*scoreDisplayNumber[1] ;
-		}
-		if(scoreCountingModulo>9){
-			scoreDisplayNumber[2]  = (int)(scoreCountingModulo/10);
-			scoreCountingModulo = scoreCountingModulo - 10*scoreDisplayNumber[2] ;
-		}
-		if (scoreCountingModulo<10){
-			scoreDisplayNumber[3]  = scoreCountingModulo;
+		
+		for( int i = 0 ; i < scoreDisplayNumber.length; i++){
+			int number = (int) Math.pow(10, scoreDisplayNumber.length-1-i);
+			if(number >= 10){
+				if(scoreCountingModulo> number - 1){
+					scoreDisplayNumber[i]  = (int)(scoreCountingModulo/number);
+					scoreCountingModulo = scoreCountingModulo - number*scoreDisplayNumber[i];
+				}
+			}
+			else if (scoreCountingModulo<10){
+				scoreDisplayNumber[i]  = scoreCountingModulo;
+			}
 		}
 		
 		for( int i = 0 ; i < scoreDisplayImg.length ; i++)
@@ -56,9 +53,9 @@ public class Score {
 	}
 	
 	
-	public void Display(){
+	public void Display(float startX, float startY){
 		for(int i = 0 ; i<scoreDisplayImg.length; i++)
-		scoreDisplayImg[i].draw(100+(i*50),0);
+		scoreDisplayImg[i].draw(startX+(i*50),startY);
 	}
 	
 	public void Reset(){

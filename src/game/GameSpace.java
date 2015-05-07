@@ -34,16 +34,13 @@ public class GameSpace extends BasicGame
 	//Setup for the screen size
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
-	
-	
-	public boolean pressed= false;
-	
-	
-	
+	public boolean pressed = false;
 	public int level = 0;
 	int Xpos, Ypos;
-	private Image level_0_NewGame, level_0_exit, level_0_backgroundImg, level_1_backgroundImg,level_3_backgroundImg;
+
+	private Image level_0_NewGame, level_0_exit, level_0_backgroundImg, level_1_backgroundImg, level_3_backgroundImg;
 	private Image [] brickTex = new Image[3];
+	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
 	
@@ -76,8 +73,8 @@ public class GameSpace extends BasicGame
 		
 		//import images for brick textures
 
-		for(int i = 0 ; i < brickTex.length; i++)
-			brickTex[i] = new Image("/img/"+"brick" + (brickTex.length - i) + ".png");
+		for(int i = 0 ; i < brickTexture.length; i++)
+			brickTexture[i] = new Image("/img/"+"brick" + (brickTexture.length - i) + ".png");
 		
 
 
@@ -112,6 +109,7 @@ public class GameSpace extends BasicGame
 				player.moveRight();
 			else 
 				player.resetSpeed();
+
     
 			/////////////////////////////////////////
 			//Collision
@@ -181,7 +179,10 @@ public class GameSpace extends BasicGame
         	ball.Reset();
         	player.Reset();
         	score.Reset();
-        	ball.ResetBallAcceleration(); 	
+
+        	
+        	
+
         }   
 	}
 
@@ -201,10 +202,10 @@ public class GameSpace extends BasicGame
 			level_0_backgroundImg.draw(0,0);
 			
 			life.Display(900, 5);
-			score.Display();
+			score.Display(100,0);
 			
 			for(int i = 0 ; i<bricks.length; i++)
-				bricks[i].Display(brickTex);
+				bricks[i].Display(brickTexture);
 			
 			g.setColor(Color.white);
 			g.drawRect(player.GetX() , spaceHeight - 100, player.GetLength() , player.GetWidth());
@@ -218,7 +219,7 @@ public class GameSpace extends BasicGame
 			 level_0_backgroundImg.draw(0,0);
 
 			//Display score images and lose life images
-			 score.Display();
+			 score.Display(100,0);
 			 life.Display(900, 5);
 			 
 				if(timer.delay==3){
