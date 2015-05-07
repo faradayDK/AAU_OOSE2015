@@ -92,4 +92,11 @@ public class Brick
 		checkLife();
 	}
 	
+	public Brick Spawn (Brick [] bricks){
+		
+		return null;
+
+		
+	}
+	
 }

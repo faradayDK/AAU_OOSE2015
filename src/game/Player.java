@@ -27,15 +27,18 @@ public class Player {
 	public void moveLeft() {
 		  checkSpeed();
 	    positionX-=speed; 
+	    checkBorders();
 
 
 	}
 	public void moveRight(){
 		  checkSpeed();
 	    positionX+=speed;
+	    checkBorders();
 	  
 	}
-	public void checkBorders(){
+	
+	private void checkBorders(){
 		if (positionX<93){
 			positionX = 93;
 		}
@@ -43,9 +46,11 @@ public class Player {
 			positionX = 1013;
 		}
 	}
+	
 	public void resetSpeed(){
 		speed = speedConstant;
 	}
+	
 	private void checkSpeed(){
 		if(speed + 0.005f < 12.0f)
 		speed =speed+ 0.8f;

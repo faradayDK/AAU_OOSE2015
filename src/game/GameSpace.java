@@ -59,6 +59,7 @@ public class GameSpace extends BasicGame
 	private Image level1, exit, back, back1, livesWord, life;
 	private Image [] brickTex = new Image[3];
 	private Image[] loseLife = new Image[3];
+	
 	public GameSpace(String gameName)
 	{
 		super(gameName);
@@ -100,6 +101,7 @@ public class GameSpace extends BasicGame
 		back1 = new Image("/img/back1.jpg");
 		livesWord = new Image("img/LivesWord.png");
 		life = new Image("img/Life.png");
+		
 		for (int i =0; i<loseLife.length; i++)
 			loseLife[i] = new Image("img/lost"+ (i+1) +".png");
 		
@@ -120,17 +122,10 @@ public class GameSpace extends BasicGame
 			//////////////////////////////////////////
 			//Player control
 			Input input = gc.getInput();
-			if (input.isKeyDown(Input.KEY_LEFT)){
-				
+			if (input.isKeyDown(Input.KEY_LEFT))
 				player.moveLeft();
-				player.checkBorders();
-			}
-       
-			else if (input.isKeyDown(Input.KEY_RIGHT)){
+			else if (input.isKeyDown(Input.KEY_RIGHT))
 				player.moveRight();
-				player.checkBorders();
-			}
-        
 			else 
 				player.resetSpeed();
     
@@ -155,7 +150,6 @@ public class GameSpace extends BasicGame
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
         		if(intr.collisionBallBrick(ball, bricks[j]) && !bricks[j].GetDestroyed()){
-        		//ball.fliesRight = !ball.fliesRight;
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
         		scoreCounter();

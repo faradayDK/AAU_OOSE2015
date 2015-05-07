@@ -8,7 +8,7 @@ public class BrickSpawn {
 	private float width;
 	private float height;
 	
-	//creates the different lines of bricks with different type
+	//creates the different lines of bricks with different type 
 	public BrickSpawn(Brick [] bricks, float startWidth, float startHeight){
 		this.height = startHeight; 
 		this.width = startWidth;
