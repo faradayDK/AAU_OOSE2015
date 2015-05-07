@@ -31,7 +31,6 @@ public class GameSpace extends BasicGame
 	public Score score;
 	public Life life;
 	
-	public int lives = 3;
 	//Setup for the screen size
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
@@ -145,6 +144,7 @@ public class GameSpace extends BasicGame
         	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
         	ball.Reset();
         	player.Reset();
+        	score.Reset();
         	 ball.ballAcceleration = ball.ballAcceleration/2;
         	
         	

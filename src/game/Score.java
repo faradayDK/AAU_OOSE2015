@@ -18,8 +18,7 @@ public class Score {
 			try {
 				scoreAllImg[i] = new Image("/img/" + i + ".png");
 			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("/img/" + i + ".png cannot be found");
 			}
 		
 		//Number that will be displayed
