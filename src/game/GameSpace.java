@@ -91,12 +91,9 @@ public class GameSpace extends BasicGame
 	        	//change levels by clicking on menu
 	    		
 	    		Xpos = Mouse.getX();
-	    		//use to solve upwards problem!
-	    		Ypos = spaceHeight - Mouse.getY();
-	    	
+	    		Ypos = spaceHeight - Mouse.getY();	
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0)){
-	    				level = 1;
-	    				
+	    				level = 1;			
 	    		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
 	    						System.exit(0);
 	            }
@@ -104,10 +101,10 @@ public class GameSpace extends BasicGame
 		
 		//the following code will be running if the level is equal to 1. (Game process)
 		if(level == 1){
-			
+			//starts ball to move
 			ball.MoveBall();
-			//////////////////////////////////////////
-			//Player control
+			
+			//the following code makes it possible to control player.
 			Input input = gc.getInput();
 			if (input.isKeyDown(Input.KEY_LEFT))
 				player.moveLeft();
@@ -115,8 +112,8 @@ public class GameSpace extends BasicGame
 				player.moveRight();
 			else 
 				player.resetSpeed();
-			/////////////////////////////////////////
-			//Collision
+			
+			//detects if there was a collision between player and ball, and if yes. calculates the angle for the ball
         	if(ball.Collision(player) ){
         		ball.fliesDown = !ball.fliesDown;
         		if (input.isKeyDown(Input.KEY_LEFT)){
@@ -126,23 +123,27 @@ public class GameSpace extends BasicGame
         			ball.BallAngle2(player);	
         		}
         	}
-        	/////////////////////////////
+        	
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
         		if(ball.Collision(bricks[j])){
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
-        		//scoreCounter();
         		score.Add();
         		}
         	}
+        	
+        	//detects if player misses the ball. than it takes away one life and pushes you back to the game
+        	// through level 2, which is just notification "get prepared in 3,2,1"
         	if(ball.GetY()>700){
         		life.Reduce();
         		level = 2;	
         	}
+        	
+        	//player can make a pause during the game by pressing ESC. It will throw him to the small menu where the player can 
+        	// continue the game or exit to the main menu
         	if (input.isKeyPressed(Input.KEY_ESCAPE)){
         		level = 3;
-        		System.out.println(level);
         	}     		
 		}
 		
@@ -151,9 +152,12 @@ public class GameSpace extends BasicGame
 			Input input = gc.getInput();
 			Xpos = Mouse.getX();
     		Ypos = spaceHeight - Mouse.getY();
+    		// if player have clicked in a specific range, it throws to the 1st level (the actual game)
             if(Xpos>250 && Xpos<950 && Ypos>250 && Ypos<440 && mouseClicked(0)){
     				level = 1;
             }
+            
+            // if player exits the game, it refreshes, preparing the new one. it resets the ball, player, score, and so on.
     		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
     			score.Reset();
     			level = 0;
@@ -163,11 +167,14 @@ public class GameSpace extends BasicGame
             	player.Reset();
             	
     		}
+    		//player can also go back to game by pressing ESC again
     		if (level==3 && input.isKeyPressed(Input.KEY_ESCAPE)){
         		level = 1;
         	}	
     		
 		}
+		// this level pups up if player lost the game. it notifies that he/she lost the game, shows the score and gives 
+		// 2 options - go to main menu or start another game. Whatever player chooses, program will refresh all the data for future game
 		if (level ==4){
 			
 			Xpos = Mouse.getX();
@@ -194,6 +201,7 @@ public class GameSpace extends BasicGame
     		}
 			
 		}
+		//this level server for notifying player about winning the game. it works the same as 4th level.
 		if (level ==5){
 			
 			Xpos = Mouse.getX();
@@ -223,7 +231,8 @@ public class GameSpace extends BasicGame
 		if(destroyedBricks == bricks_Amount){
 			level = 5;
 		}
-		
+		// this code is connected with timer. at some point the timer starts to count down. and if the count
+		// (delay variable) equals to 0, it returns player to the game. this code works in case if player misses the ball
         if (timer.delay == 0){
         	ball.Reset();
         	player.Reset();
@@ -231,6 +240,7 @@ public class GameSpace extends BasicGame
 			 timer.resetDelay();
 			 //ball.ResetBallAcceleration();
 		 }
+        // this code throws player to the 4 level. it happens if player has lost all his lives. 
         if (life.Get() == 0){
         	level = 4;
         	life.Reset();
@@ -244,6 +254,13 @@ public class GameSpace extends BasicGame
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
+		// the void render is divided into 6 sections :
+		// 1)for main menu
+		// 2) for game 
+		// 3) for small menu during the game (pause)
+		// 4) for notifying player to be ready to start
+		// 5) loosing condition
+		// 6) winning condition.
 		 if (level == 0) {
 			//render main menu
 		
@@ -255,15 +272,20 @@ public class GameSpace extends BasicGame
 		 //render the game
 
 		 else if(level == 1) {
+			// shows up the background picture
 			level_0_backgroundImg.draw(0,0);
 			
+			//shows up the amount of lives
 			life.Display(900, 5);
+			
+			//shows the score
 			score.Display(100,5);
-
+			
+			//Bricks appear in the scene
 			for(int i = 0 ; i<bricks.length; i++)
 				bricks[i].Display(brickTexture);
 			
-
+			//Player and ball 
 			player.Display();
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
@@ -278,6 +300,7 @@ public class GameSpace extends BasicGame
 			 life.Display(900, 5);
 			 score.Display(100,5);
 			 
+			 	// this code follows the timer, and with every decadence of delay variable, it shows picture.
 				if(timer.delay==3){
 					secondsCountingImg[2].draw(0,0);
 					timer.Start();
