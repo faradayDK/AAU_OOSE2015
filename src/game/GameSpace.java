@@ -38,7 +38,9 @@ public class GameSpace extends BasicGame
 	public int level = 0;
 	int Xpos, Ypos;
 
-	private Image level_0_NewGame, level_0_exit, level_0_backgroundImg, level_1_backgroundImg, level_3_backgroundImg;
+	private Image level_0_NewGame, level_0_exit,
+	level_0_backgroundImg, level_1_backgroundImg, 
+	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -66,6 +68,9 @@ public class GameSpace extends BasicGame
 		level_0_backgroundImg = new Image("/img/back.jpg");
 		level_1_backgroundImg = new Image("/img/back1.jpg");
 		level_3_backgroundImg = new Image("/img/ifPause.png");
+		level_4_backgroundImg = new Image("/img/ifLost.png");
+		level_5_backgroundImg = new Image("/img/ifWinner.png");
+		
 		
 		for (int i =0; i<secondsCountingImg.length; i++)
 			secondsCountingImg[i] = new Image("img/lost"+ (i+1) +".png");
@@ -158,9 +163,57 @@ public class GameSpace extends BasicGame
     		}
     		if (level==3 && input.isKeyPressed(Input.KEY_ESCAPE)){
         		level = 1;
-        	}
+        	}	
+    		
+		}
+		if (level ==4){
 			
+			Xpos = Mouse.getX();
+    		Ypos = spaceHeight - Mouse.getY();
+            if(Xpos>250 && Xpos<950 && Ypos>250 && Ypos<440 && mouseClicked(0)){
+            	score.Reset();
+    			level = 1;
+            	life.Reset();
+            	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
+            	ball.Reset();
+            	player.Reset();
+            }
+    		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
+    			score.Reset();
+    			level = 0;
+            	life.Reset();
+            	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
+            	ball.Reset();
+            	player.Reset();
+            	
+    		}
 			
+		}
+		if (level ==5){
+			
+			Xpos = Mouse.getX();
+    		Ypos = spaceHeight - Mouse.getY();
+            if(Xpos>250 && Xpos<950 && Ypos>250 && Ypos<440 && mouseClicked(0)){
+            	score.Reset();
+    			level = 1;
+            	life.Reset();
+            	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
+            	ball.Reset();
+            	player.Reset();
+            }
+    		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
+    			score.Reset();
+    			level = 0;
+            	life.Reset();
+            	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
+            	ball.Reset();
+            	player.Reset();
+            	
+    		}
+			
+		}
+		if(){
+			level = 5;
 		}
 		
         if (timer.delay == 0){
@@ -168,16 +221,15 @@ public class GameSpace extends BasicGame
         	player.Reset();
 			 level = 1;
 			 timer.resetDelay();
-			 ball.ResetBallAcceleration();
+			 //ball.ResetBallAcceleration();
 		 }
-        
         if (life.Get() == 0){
-        	level = 0;
+        	level = 4;
         	life.Reset();
         	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
         	ball.Reset();
         	player.Reset();
-        	score.Reset();
+        	//score.Reset();
         }   
 	}
 
@@ -238,10 +290,17 @@ public class GameSpace extends BasicGame
 		 }
 		 //this level will load up if player lost the game
 		 else if(level==4){
+			 level_0_backgroundImg.draw(0,0);
+			 level_4_backgroundImg.draw(0,0);
+			 score.Display(630,265);
 			 
 		 }
 		 //this level will load up if player won the game
 		 else if(level ==5){
+			 level_0_backgroundImg.draw(0,0);
+			 level_5_backgroundImg.draw(0,0);
+			 score.Display(630,265);
+			 
 			 
 		 }
 	}
