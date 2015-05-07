@@ -153,9 +153,13 @@ public class GameSpace extends BasicGame
     				level = 1;
             }
     		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
-    			level =0;
-    			ball.Reset();
-    			player.Reset();
+    			level = 0;
+            	life.Reset();
+            	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
+            	ball.Reset();
+            	player.Reset();
+            	score.Reset();
+    		;
     		}
     		if (level==3 && input.isKeyPressed(Input.KEY_ESCAPE)){
         		level = 1;
