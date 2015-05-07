@@ -248,12 +248,14 @@ public class GameSpace extends BasicGame
 			level_0_exit.draw(100,400);
 			
 		 }
+		 //render the game
 
 		 else if(level == 1) {
 			level_0_backgroundImg.draw(0,0);
 			
 			life.Display(900, 5);
 			score.Display(100,0);
+			//render bricks
 			for(int i = 0 ; i<bricks.length; i++)
 				bricks[i].Display(brickTexture);
 			
@@ -328,7 +330,7 @@ public class GameSpace extends BasicGame
 			}
 		}
 
-	
+	//method for getting input from mouse
 	public boolean mouseClicked(int button){
 		boolean pressed = Mouse.isButtonDown(button);
 		return pressed;
