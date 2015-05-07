@@ -1,4 +1,5 @@
 package game;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +26,7 @@ public class GameSpace extends BasicGame
 	//Call method that spawns the bricks in a grid
 	public Brick [] bricks = Brick.Spawn(bricks_Amount, bricks_StartX, bricks_StartY);
 	
+	public int ifBuff;
 	//Create objects
 	public Ball ball;
 	public Player player;
@@ -127,6 +129,10 @@ public class GameSpace extends BasicGame
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
         		if(ball.Collision(bricks[j])){
+        		ifBuff = randInt(1,10);
+        		if(ifBuff==3){
+        			score.Collector();
+        		}
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
         		score.Add(1);
@@ -363,4 +369,16 @@ public class GameSpace extends BasicGame
 		boolean pressed = Mouse.isButtonDown(button);
 		return pressed;
 	}	
+	public static int randInt(int min, int max) {
+
+	    // NOTE: Usually this should be a field rather than a method
+	    // variable so that it is not re-seeded every call.
+	    Random rand = new Random();
+
+	    // nextInt is normally exclusive of the top value,
+	    // so add 1 to make it inclusive
+	    int randomNum = rand.nextInt((max - min) + 1) + min;
+
+	    return randomNum;
+	}
 }
