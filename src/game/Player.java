@@ -2,7 +2,7 @@ package game;
 
 public class Player {
 	private float positionX;
-	private float positionY = 600;
+	private float positionY = 612;
 	public float speed;
 	public int length;
 	public int width;

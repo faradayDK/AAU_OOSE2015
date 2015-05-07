@@ -85,6 +85,9 @@ public class Ball {
 		if(this.x>=rightBorder){
 			fliesRight =false;
 		}
+		if (this.y<45){
+			fliesDown = true;
+		}
 	}
 	public void Reset(){
 		this.x = 400;
@@ -111,7 +114,7 @@ public class Ball {
 	public boolean Collision(Player player){
 		
 		if(this.x > player.GetX()-5 && this.x < (player.GetX() + player.GetLength()+5)){
-			if(this.y > player.GetY() && this.y < (player.GetY() + player.GetWidth())){
+			if(this.y > player.GetY() - player.GetWidth() && this.y < (player.GetY() + player.GetWidth())){
 				this.y -=5;
 				return true;
 			}

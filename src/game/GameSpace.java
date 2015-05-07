@@ -19,12 +19,13 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables for bricks
-	int bricks_Amount = 90;
+	int bricks_Amount = 80;
 	int bricks_StartX = 100;
-	int bricks_StartY = 50;
+	int bricks_StartY = 100;
+	//Call method that spawns the bricks in a grid
 	public Brick [] bricks = Brick.Spawn(bricks_Amount, bricks_StartX, bricks_StartY);
 	
-	//create ball and player object
+	//Create objects
 	public Ball ball;
 	public Player player;
 	public Timer timer;
@@ -72,11 +73,11 @@ public class GameSpace extends BasicGame
 		level_5_backgroundImg = new Image("/img/ifWinner.png");
 		
 		
+		//Assign images for the 
 		for (int i =0; i<secondsCountingImg.length; i++)
 			secondsCountingImg[i] = new Image("img/lost"+ (i+1) +".png");
 		
-		//import images for brick textures
-
+		//Assign textures for the brick types
 		for(int i = 0 ; i < brickTexture.length; i++)
 			brickTexture[i] = new Image("/img/"+"brick" + (brickTexture.length - i) + ".png");
 		
@@ -212,7 +213,10 @@ public class GameSpace extends BasicGame
     		}
 			
 		}
-		if(){
+		int destroyedBricks = 0;
+		for(int i = 0 ; i < bricks.length ; i++)
+			if(bricks[i].GetDestroyed()) destroyedBricks++;
+		if(destroyedBricks == bricks_Amount){
 			level = 5;
 		}
 		
@@ -250,12 +254,11 @@ public class GameSpace extends BasicGame
 			
 			life.Display(900, 5);
 			score.Display(100,0);
-			
 			for(int i = 0 ; i<bricks.length; i++)
 				bricks[i].Display(brickTexture);
 			
 			g.setColor(Color.white);
-			g.drawRect(player.GetX() , spaceHeight - 100, player.GetLength() , player.GetWidth());
+			g.drawRect(player.GetX() , player.GetY(), player.GetLength() , player.GetWidth());
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			

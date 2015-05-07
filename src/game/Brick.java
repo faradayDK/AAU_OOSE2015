@@ -21,17 +21,18 @@ public class Brick
 	 * @param x X coordinate for the top-right corner
 	 * @param y Y coordinate for the top-right corner
 	 */
-	private Brick(int type, float x , float y)
+	protected Brick(int type, float x , float y)
 	{
 		this.type = type;
 		if(type == 1 || type == 2 || type == 3)
 			lives = type;
-		//else if (type == 4)
+		else 
+			lives = 1;
 		this.x = x;
 		this.y = y;
 		this.destroyed = false;
 	}
-	
+
 	/**
 	 * Method for assigning coordinates and types for bricks
 	 * @param amount is the amount of bricks that need to be created
