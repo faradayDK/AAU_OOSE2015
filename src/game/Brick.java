@@ -7,8 +7,8 @@ public class Brick
 	private int type = 0;
 	private int lives = 3;
 	private float x, y ;
-	private float width = 100;
-	private float height = 25;
+	private static float width = 100;
+	private static float height = 25;
 	private boolean destroyed;
 	
 	/**
@@ -17,7 +17,7 @@ public class Brick
 	 * @param x X coordinate for the top-right corner
 	 * @param y Y coordinate for the top-right corner
 	 */
-	public Brick(int type, float x , float y)
+	private Brick(int type, float x , float y)
 	{
 		this.type = type;
 		if(type == 1 || type == 2 || type == 3)
@@ -26,6 +26,30 @@ public class Brick
 		this.x = x;
 		this.y = y;
 		this.destroyed = false;
+	}
+	
+	public static Brick[] Spawn (int amount, float startX, float startY){
+		
+		Brick[] bricks = new Brick[amount];
+		float interval = 3f;
+		float bricksWidth = width;
+		float bricksHeight = height;
+		float coordX = startX;
+		float coordY = startY;
+
+
+		for(int i = 0 ; i < bricks.length ; i++){
+			int type = (i/10)%3 +1;
+			bricks[i] = new Brick(type, coordX, coordY);
+			if(coordX + bricksWidth + 200 > 1280){
+				coordX = startX;
+				coordY += bricksHeight + interval;
+			}			
+			
+			else
+			coordX += bricksWidth + interval;	
+		}
+		return bricks;
 	}
 	
 	/**
@@ -50,7 +74,7 @@ public class Brick
 	 */
 	public float GetHeight()
 	{
-		return this.height;
+		return height;
 	}
 	/**
 	 * Get the width of the brick
@@ -58,7 +82,7 @@ public class Brick
 	 */
 	public float GetWidth()
 	{
-		return this.width;
+		return width;
 	}
 	
 	
@@ -92,11 +116,6 @@ public class Brick
 		checkLife();
 	}
 	
-	public Brick Spawn (Brick [] bricks){
-		
-		return null;
 
-		
-	}
 	
 }

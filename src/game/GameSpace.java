@@ -24,8 +24,7 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables for bricks
-	public Brick [] bricks = new Brick[90];
-	public BrickSpawn brickSpawn;
+	public Brick [] bricks = Brick.Spawn(90, 100, 50);
 	//create ball and player object
 	public Ball ball;
 	public Player player;
@@ -88,8 +87,6 @@ public class GameSpace extends BasicGame
 			scoreDisplayImg[i] = scoreImg[0];
 		
 		//create grid of bricks
-		brickSpawn = new BrickSpawn(bricks, 100, 50);
-		
 
 		
 		
