@@ -109,7 +109,7 @@ public class GameSpace extends BasicGame
 	}
 	public void update(GameContainer gc, int delta) throws SlickException {
 		
-		
+		System.out.println(ball.ballAcceleration);
 		//If game level
 		if(level == 1){
 			ball.MoveBall();
