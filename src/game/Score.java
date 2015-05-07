@@ -30,7 +30,7 @@ public class Score {
 			} catch (SlickException e) {
 				System.out.println("/img/" + i + ".png cannot be found");
 			}
-		//assign image for the socre word
+		//assign image for the score word
 		try {
 			scoreWord = new Image("/img/ScoreWord.png");
 		} catch (SlickException e) {
