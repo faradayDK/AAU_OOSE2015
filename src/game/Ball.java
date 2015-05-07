@@ -86,4 +86,27 @@ public class Ball {
 		this.x = 400;
 		this.y = 400;
 	}
+	
+	public boolean collision(Player player){
+		
+		if(this.x > player.GetX()-5 && this.x < (player.GetX() + player.GetLength()+5)){
+			if(this.y > player.GetY() && this.y < (player.GetY() + player.GetWidth())){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean collision(Brick brick){
+		
+		float correction = 1.5f;
+		if(this.x + correction > brick.GetX() - correction && this.x - correction < (brick.GetX() + brick.GetWidth() + correction)){
+			if(this.y + correction > brick.GetY() - correction && this.y - correction  < (brick.GetY() + brick.GetHeight() + correction)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

@@ -31,10 +31,6 @@ public class GameSpace extends BasicGame
 	public Timer timer;
 	
 	public int lives = 3;
-
-	
-	public Intersection intr = new Intersection();
-
 	//Setup for the screen size
 	public static int spaceHeight = 720;
 	public static int spaceWidth = 1280;
@@ -106,7 +102,7 @@ public class GameSpace extends BasicGame
 			/////////////////////////////////////////
 			//Collision
        
-        	if(intr.collisionBallPlayer(ball, player) ){
+        	if(ball.collision(player) ){
         		
         		ball.fliesDown = !ball.fliesDown;
         	
@@ -123,7 +119,7 @@ public class GameSpace extends BasicGame
         	/////////////////////////////
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
-        		if(intr.collisionBallBrick(ball, bricks[j]) && !bricks[j].GetDestroyed()){
+        		if(ball.collision(bricks[j]) && !bricks[j].GetDestroyed()){
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
         		//scoreCounter();
@@ -197,16 +193,14 @@ public class GameSpace extends BasicGame
 				life.draw(1060,5);
 				
 			}
+			
 			for(int i = 0 ; i<bricks.length; i++){
 				if(!bricks[i].GetDestroyed()){
 					brickTex[bricks[i].GetType()-1].draw(bricks[i].GetX(), bricks[i].GetY());
 
 				}
 			}
-			for(int i = 0 ; i<bricks.length; i++){
-				//g.drawRect(bricks[i].GetX() ,bricks[i].GetY() , bricks[i].GetWidth() , bricks[i].GetHeight() );
-				//System.out.println(bricks[i].GetX());
-			}
+			
 			g.setColor(Color.white);
 			g.drawRect(player.GetX() , spaceHeight - 100, player.length , player.width);
 			g.setColor(Color.white);
