@@ -73,14 +73,11 @@ public class Score {
 		scoreWord.draw(startX, startY);
 		for(int i = 0 ; i<scoreDisplayImg.length; i++)
 		scoreDisplayImg[i].draw(startX + 100 +(i*50),startY);
+
 	}
 	
 	public void Reset(){
 		score = -1;
-		Add();
-		
-
-		
-		
+		Add();	
 	}
 }
