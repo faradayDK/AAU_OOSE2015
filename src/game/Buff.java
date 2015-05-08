@@ -45,7 +45,7 @@ public class Buff {
 	public float GetY(){
 		return y;
 	}
-	//gets width of buff in order to later spawn it from the middle of brick
+	//gets width of buff in order to later spawn it from the middle of brick.
 	public float GetWidth(){
 		return width;
 	}
