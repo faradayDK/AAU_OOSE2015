@@ -20,7 +20,7 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables for bricks
-	int bricks_Amount = 80;
+	int bricks_Amount = 3;
 	int bricks_StartX = 100;
 	int bricks_StartY = 100;
 	//Call method that spawns the bricks in a grid
@@ -103,7 +103,7 @@ public class GameSpace extends BasicGame
 	    		Ypos = spaceHeight - Mouse.getY();	
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
-	    		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
+	    		if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0))
 	    						System.exit(0);
 	            
 	        }
@@ -141,11 +141,11 @@ public class GameSpace extends BasicGame
         	for(int j = 0 ; j < bricks.length ; j++){
         		if(ball.Collision(bricks[j])){
         		ifBuff = randInt(1,10);
-        		ifBuffLive = randInt(1,50);
+        		ifBuffLive = randInt(1,30);
         		if(ifBuff==3){
         			buff.Spawn(bricks[j].GetX(), bricks[j].GetY());
         		}
-        		if(ifBuffLive == 16 && ifBuffLive == 39 && ifBuffLive == 3) {
+        		if( ifBuffLive == 28 ) {
         			buffLive.Spawn(bricks[j].GetX(),bricks[j].GetY());
         		}
         		ball.fliesDown = !ball.fliesDown;
@@ -363,14 +363,14 @@ public class GameSpace extends BasicGame
 		 else if(level==4){
 			 level_0_backgroundImg.draw(0,0);
 			 level_4_backgroundImg.draw(0,0);
-			 score.Display(510,385); 
+			 score.Display(450,380); 
 			 
 		 }
 		 //this level will load up if player won the game
 		 else if(level ==5){
 			 level_0_backgroundImg.draw(0,0);
 			 level_5_backgroundImg.draw(0,0);
-			 score.Display(630,265); 
+			 score.Display(500,385); 
 			 
 			 
 		 }
