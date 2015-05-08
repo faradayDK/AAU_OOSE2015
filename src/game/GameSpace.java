@@ -101,11 +101,12 @@ public class GameSpace extends BasicGame
 	        	//change levels by clicking on menu
 	    		
 	    		Xpos = Mouse.getX();
-	    		Ypos = spaceHeight - Mouse.getY();	
+	    		Ypos = spaceHeight - Mouse.getY();
+	    		
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
-	            else if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0) )
-	    						System.exit(0);
+	            else if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0) );
+	    						//System.exit(0);
 	            
 	        }
 		//

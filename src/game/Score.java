@@ -74,7 +74,7 @@ public class Score {
 			if(number >= 10){
 				//checks whether the score can be divisible by certain decimal
 				//if no -> leave this digit as 0
-				if(scoreCountingModulo> number - 1){
+				if(scoreCountingModulo>= number ){
 					//then it counts what kind of number should this certain digit take
 					scoreDisplayNumber[i]  = (int)(scoreCountingModulo/number);
 					/*then it removes the decimal part from the score (if number was 8278, after % operation it will become 278
@@ -82,6 +82,8 @@ public class Score {
 					 */
 					scoreCountingModulo = scoreCountingModulo - number*scoreDisplayNumber[i];
 				}
+				else
+					scoreDisplayNumber[i] = 0;
 			}
 			//if modulo is lower than 10 it assigns it to the last digit 
 			else if (scoreCountingModulo<10){

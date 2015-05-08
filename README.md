@@ -8,6 +8,7 @@ The application is prototype of common known _*Breakout game*_. Player should co
 
 ### Control:
 * LEFT and RIGHT to move platform
+* ESC to call in-game menu
 
 ## Project configuration
 
@@ -23,10 +24,26 @@ The application is prototype of common known _*Breakout game*_. Player should co
 9. Click the Workspace button.
 10. Select the *native* folder in your project
 11. Select your operating system and click OK until you get back to the default eclipse window.
-12. Press play to check it it works.
-13. Now, you can start making your own game.
-14. Hey.
+12. Press play to check if it works.
 
+## Build runnable JAR file:
+To generate an executable version of the game you will need to use JarSplice:
+
+1. Use _ Eclipse _
+2. Choose File -> Export
+2. Click on Java and select * Runnable JAR File * .
+3. Select your main class in the Lunch configuration drop-down menu.
+4. Select Extract required libraries into generated JAR and press the Finish button.
+5. Download JarSplice at http://ninjacave.com/jarsplice and execute it (double-click on it).
+6. Select * ADD JARS *, press the * Add Jar(s) * button in the bottom and select the previously exported JAR file, as well as, go to the _ lib _ game folder and select all Jars.
+7. Select * ADD NATIVES * , press the Add Native(s) button in the bottom, go to you projects native library and select files for your OS.
+8. Select * MAIN CLASS * , and in the Enter Main Class area type in the name of your main class including the name of the package : game.GameSpace
+9. Select * CREATE FAT JAR * and press the Create Fat Jar button.
+10. Now you can play
+
+
+***
+Authors: Jelizaveta Zovnercuka, Kristians Konovalovs, Germans Savcisens
 ***
 Aalborg University - Copenhagen , 2015
 
