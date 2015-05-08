@@ -129,7 +129,7 @@ public class GameSpace extends BasicGame
 				player.moveRight();
 			else 
 				player.resetSpeed();
-			
+			//
 			//detects if there was a collision between player and ball, and if yes. calculates the angle for the ball
         	if(ball.Collision(player) ){
         		//makes the ball fly in the opposite direction
