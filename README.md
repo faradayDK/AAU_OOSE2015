@@ -31,15 +31,17 @@ To generate an executable version of the game you will need to use JarSplice:
 
 1. Use _ Eclipse _
 2. Choose File -> Export
-2. Click on Java and select * Runnable JAR File * .
-3. Select your main class in the Lunch configuration drop-down menu.
-4. Select Extract required libraries into generated JAR and press the Finish button.
-5. Download JarSplice at http://ninjacave.com/jarsplice and execute it (double-click on it).
-6. Select * ADD JARS *, press the * Add Jar(s) * button in the bottom and select the previously exported JAR file, as well as, go to the _ lib _ game folder and select all Jars.
-7. Select * ADD NATIVES * , press the Add Native(s) button in the bottom, go to you projects native library and select files for your OS.
-8. Select * MAIN CLASS * , and in the Enter Main Class area type in the name of your main class including the name of the package : game.GameSpace
-9. Select * CREATE FAT JAR * and press the Create Fat Jar button.
-10. Now you can play
+2. Click on Java and select * JAR File * .
+3. Select current project in the Lunch configuration .
+4. Select _ Extract generated classes files and resources _ ,
+5. Select all _ Options _ in the bottom of the window.
+6. Press _ Finish _ .
+7. Download JarSplice at http://ninjacave.com/jarsplice and execute it (double-click on it).
+8. Select * ADD JARS *, press the * Add Jar(s) * button in the bottom and select the previously exported JAR file, as well as, go to the _ lib _ game folder and select all Jars.
+9. Select * ADD NATIVES * , press the Add Native(s) button in the bottom, go to you projects native library and select files for your OS.
+10. Select * MAIN CLASS * , and in the Enter Main Class area type in the name of your main class including the name of the package : game.GameSpace
+11. Select * CREATE FAT JAR * and press the Create Fat Jar button.
+12. * Now you can play *
 
 
 ***
