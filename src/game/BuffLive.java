@@ -22,7 +22,7 @@ public class BuffLive {
 			System.out.println("/img/buffLive.png cannot be found");
 		}
 	}
-	public void moveLiveBuff(){
+	public void moveBuff(){
 		yLive+=3;
 	}
 	//gets location of buff
@@ -35,19 +35,19 @@ public class BuffLive {
 	public float GetWidth(){
 		return width;
 	}
-	public void SpawnLive(float x, float y) {
+	public void Spawn(float x, float y) {
 		this.xLive = x;
 		this.yLive = y;
 		collected = false;
 	
 	}
-	public void CollectedLive(){
+	public void Collected(){
 		collected = true;
 	}
-	public boolean GetCollectedLive(){
+	public boolean GetCollected(){
 		return collected;
 	}
-	public void DisplayLive(){
+	public void Display(){
 		if(!collected)
 		imageLive.draw(xLive,yLive);
 	}

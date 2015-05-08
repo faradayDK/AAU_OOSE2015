@@ -158,4 +158,15 @@ public class Player {
 		
 		return false;
 	}
+public boolean Collision(BuffLive buffLive){
+		
+		//float correction = 10f;
+		if(positionX < buffLive.GetX()  && positionX+100  > (buffLive.GetX()   )){
+			if(positionY  < buffLive.GetY()  && positionY+20  > (buffLive.GetY()  )){
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

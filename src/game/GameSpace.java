@@ -26,7 +26,7 @@ public class GameSpace extends BasicGame
 	//Call method that spawns the bricks in a grid
 	public Brick [] bricks = Brick.Spawn(bricks_Amount, bricks_StartX, bricks_StartY);
 	
-	public int ifBuff;
+	public int ifBuff, ifBuffLive;
 	//Create objects
 	public Ball ball;
 	public Player player;
@@ -34,6 +34,7 @@ public class GameSpace extends BasicGame
 	public Score score;
 	public Life life;
 	public Buff buff;
+	public BuffLive buffLive;
 	
 	//Setup for the screen size
 	public static int spaceHeight = 720;
@@ -44,7 +45,7 @@ public class GameSpace extends BasicGame
 
 	private Image level_0_NewGame, level_0_exit,
 	level_0_backgroundImg, level_1_backgroundImg, 
-	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
+	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg, BuffLive;
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -65,6 +66,7 @@ public class GameSpace extends BasicGame
 		score = new Score();
 		life = new Life();
 		buff = new Buff(1000,1000);
+		buffLive = new BuffLive(1000,1000);
 		
 		
 		
@@ -77,6 +79,7 @@ public class GameSpace extends BasicGame
 		level_3_backgroundImg = new Image("/img/ifPause.png");
 		level_4_backgroundImg = new Image("/img/ifLost.png");
 		level_5_backgroundImg = new Image("/img/ifWinner.png");
+		
 		
 		
 		
@@ -109,6 +112,7 @@ public class GameSpace extends BasicGame
 		if(level == 1){
 			
 			buff.moveBuff();
+			buffLive.moveBuff();
 			
 			//starts ball to move
 			ball.MoveBall();
@@ -137,8 +141,12 @@ public class GameSpace extends BasicGame
         	for(int j = 0 ; j < bricks.length ; j++){
         		if(ball.Collision(bricks[j])){
         		ifBuff = randInt(1,10);
+        		ifBuffLive = randInt(1,50);
         		if(ifBuff==3){
         			buff.Spawn(bricks[j].GetX(), bricks[j].GetY());
+        		}
+        		if(ifBuffLive == 16 && ifBuffLive == 39 && ifBuffLive == 3) {
+        			buffLive.Spawn(bricks[j].GetX(),bricks[j].GetY());
         		}
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
@@ -146,11 +154,18 @@ public class GameSpace extends BasicGame
 
         		}
         	}
-        	
+        	//if player collects buff on score
         	if (player.Collision(buff) && !buff.GetCollected()){
         		
         		score.Add(100);
         		buff.Collected();
+        	}
+        	
+        	//if player collects buff on live
+        	if (player.Collision(buffLive) && !buffLive.GetCollected()){
+        		
+        		life.AddLife();
+        		buffLive.Collected();
         	}
 
         	
@@ -312,6 +327,7 @@ public class GameSpace extends BasicGame
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
 			buff.Display();
+			buffLive.Display();
 			
 		}
 		 

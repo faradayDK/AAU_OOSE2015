@@ -64,5 +64,12 @@ public class Life {
 	public void Reset(){
 		life = 3;
 	}
+	public void AddLife(){
+		if(life<3) {
+			life++;
+		}
+		else
+			life =3;
+	}
 
 }
