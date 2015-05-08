@@ -2,6 +2,12 @@
 
 The application is prototype of common known _*Breakout game*_. Player should control the panel at the bottom of the games pace, he/she can move it to the left or to the right by clicking on the corresponding button. His/her goal is to keep a flying ball in game space and to lead ball in the direction of the bricks. Each time ball hits the brick -> brick breaks (a bit); after several hits, the brick destroys. Player wins if all bricks are destroyed and looses if he/she missed ball three times (i.e. lost three lives). During the game process, player can see the buffs, if player collects them with a platform -> he/she can get more scores or one additional life.
 
+### Features:
+* Bricks has different type of "breakness"
+* Player can collect buffs to enlarge scores and get more lives
+
+### Control:
+* LEFT and RIGHT to move platform
 
 ## Project configuration
 
