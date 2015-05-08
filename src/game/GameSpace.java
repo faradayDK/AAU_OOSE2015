@@ -103,7 +103,7 @@ public class GameSpace extends BasicGame
 	    		Ypos = spaceHeight - Mouse.getY();	
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
-	    		if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0))
+	    		if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0));
 	    						System.exit(0);
 	            
 	        }
