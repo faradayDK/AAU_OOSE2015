@@ -108,7 +108,7 @@ public class GameSpace extends BasicGame
 	    						System.exit(0);
 	            
 	        }
-		
+		//
 		//the following code will be running if the level is equal to 1. (Game process)
 		if(level == 1){
 			
@@ -145,10 +145,15 @@ public class GameSpace extends BasicGame
         		ifBuff = randInt(1,10);
         		ifBuffLive = randInt(1,30);
         		if(ifBuff==3){
+        			if(buff_Score.GetY() > 720 ){
         			buff_Score.Spawn(bricks[j].GetX(), bricks[j].GetY());
+        			}
         		}
+        		
         		if( ifBuffLive == 28) {
+        			if(buff_Score.GetY() > 720 ){
         			buff_Live.Spawn(bricks[j].GetX(),bricks[j].GetY());
+        			}
         		}
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
