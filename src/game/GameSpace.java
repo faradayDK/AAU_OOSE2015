@@ -33,6 +33,7 @@ public class GameSpace extends BasicGame
 	public Timer timer;
 	public Score score;
 	public Life life;
+	public Buff buff;
 	
 	//Setup for the screen size
 	public static int spaceHeight = 720;
@@ -43,7 +44,7 @@ public class GameSpace extends BasicGame
 
 	private Image level_0_NewGame, level_0_exit,
 	level_0_backgroundImg, level_1_backgroundImg, 
-	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
+	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg, BuffPic;
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -63,6 +64,9 @@ public class GameSpace extends BasicGame
 		timer = new Timer(50,3);
 		score = new Score();
 		life = new Life();
+		buff = new Buff(1000,1000);
+		
+		
 		
 		//import images for main menu
 	
@@ -73,6 +77,7 @@ public class GameSpace extends BasicGame
 		level_3_backgroundImg = new Image("/img/ifPause.png");
 		level_4_backgroundImg = new Image("/img/ifLost.png");
 		level_5_backgroundImg = new Image("/img/ifWinner.png");
+		BuffPic= new Image("/img/BuffPic.png");
 		
 		
 		
@@ -103,6 +108,8 @@ public class GameSpace extends BasicGame
 		
 		//the following code will be running if the level is equal to 1. (Game process)
 		if(level == 1){
+			buff.moveBuff();
+			
 			//starts ball to move
 			ball.MoveBall();
 			
@@ -131,7 +138,9 @@ public class GameSpace extends BasicGame
         		if(ball.Collision(bricks[j])){
         		ifBuff = randInt(1,10);
         		if(ifBuff==3){
-        			score.Collector();
+        			buff.BrickX = bricks[j].GetX();
+        			buff.BrickY = bricks[j].GetY();
+        			
         		}
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
@@ -139,6 +148,13 @@ public class GameSpace extends BasicGame
 
         		}
         	}
+        	
+        	if (player.Collision(buff)){
+        		
+        		score.Add(100);
+        		buff.BrickY+=200;
+        	}
+
         	
         	//detects if player misses the ball. than it takes away one life and pushes you back to the game
         	// through level 2, which is just notification "get prepared in 3,2,1"
@@ -296,6 +312,7 @@ public class GameSpace extends BasicGame
 			player.Display();
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
+			BuffPic.draw(buff.GetX(), buff.GetY());
 			
 		}
 		 

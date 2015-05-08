@@ -123,7 +123,4 @@ public class Score {
 		
 		
 	}
-	void Collector(){
-		score+=100;
-	}
 }

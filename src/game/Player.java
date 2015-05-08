@@ -147,4 +147,15 @@ public class Player {
 		playerImg.draw(this.positionX, this.positionY);
 		
 	}
+	public boolean Collision(Buff buff){
+		
+		//float correction = 10f;
+		if(positionX < buff.GetX()  && positionX+100  > (buff.GetX()   )){
+			if(positionY  < buff.GetY()  && positionY+20  > (buff.GetY()  )){
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

@@ -172,4 +172,16 @@ public class Ball {
 		
 		return false;
 	}
+	public boolean CollisionWithBuff(Buff buff){
+		
+		float correction = 1.5f;
+		if(this.x + correction > buff.GetX() - correction && this.x - correction < (buff.GetX() + buff.GetWidth() + correction)){
+			if(this.y + correction > buff.GetY() - correction && this.y - correction  < (buff.GetY() + buff.GetWidth() + correction)){
+				
+					return true;
+			}
+		}
+		
+		return false;
+	}
 }
