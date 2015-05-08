@@ -44,7 +44,7 @@ public class GameSpace extends BasicGame
 
 	private Image level_0_NewGame, level_0_exit,
 	level_0_backgroundImg, level_1_backgroundImg, 
-	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg, BuffPic;
+	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -77,7 +77,6 @@ public class GameSpace extends BasicGame
 		level_3_backgroundImg = new Image("/img/ifPause.png");
 		level_4_backgroundImg = new Image("/img/ifLost.png");
 		level_5_backgroundImg = new Image("/img/ifWinner.png");
-		BuffPic= new Image("/img/BuffPic.png");
 		
 		
 		
@@ -99,15 +98,16 @@ public class GameSpace extends BasicGame
 	    		
 	    		Xpos = Mouse.getX();
 	    		Ypos = spaceHeight - Mouse.getY();	
-	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0)){
+	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
 	    		if(Xpos>250 && Xpos<950 && Ypos>315 && Ypos<470)
 	    						System.exit(0);
-	            }
+	            
 	        }
 		
 		//the following code will be running if the level is equal to 1. (Game process)
 		if(level == 1){
+			
 			buff.moveBuff();
 			
 			//starts ball to move
@@ -138,9 +138,7 @@ public class GameSpace extends BasicGame
         		if(ball.Collision(bricks[j])){
         		ifBuff = randInt(1,10);
         		if(ifBuff==3){
-        			buff.BrickX = bricks[j].GetX();
-        			buff.BrickY = bricks[j].GetY();
-        			
+        			buff.Spawn(bricks[j].GetX(), bricks[j].GetY());
         		}
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
@@ -149,10 +147,10 @@ public class GameSpace extends BasicGame
         		}
         	}
         	
-        	if (player.Collision(buff)){
+        	if (player.Collision(buff) && !buff.GetCollected()){
         		
         		score.Add(100);
-        		buff.BrickY+=200;
+        		buff.Collected();
         	}
 
         	
@@ -185,6 +183,7 @@ public class GameSpace extends BasicGame
     			score.Reset();
     			level = 0;
             	life.Reset();
+            	//Resets the initial grid of bricks
             	bricks = Brick.Reset(bricks_Amount, bricks_StartX, bricks_StartY);
             	ball.Reset();
             	player.Reset();
@@ -312,7 +311,7 @@ public class GameSpace extends BasicGame
 			player.Display();
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
-			BuffPic.draw(buff.GetX(), buff.GetY());
+			buff.Display();
 			
 		}
 		 
