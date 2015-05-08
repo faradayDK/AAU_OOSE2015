@@ -9,16 +9,28 @@ public class Buff {
 	private Image image;
 	private boolean collected;
 	
-	public Buff( float x, float y){
+	public Buff( float x, float y, int type){
 		this.x = x;
 		this.y = y;
 		this.width = 10;
 		collected = false;
 		//try to upload image of buff
-		try {
-			image = new Image("/img/BuffPic.png");
-		} catch (SlickException e) {
-			System.out.println("/img/BuffPic.png cannot be found");
+		//type 1 -> for score-buff
+		//type 2 -> for life-buff
+		if(type == 1){
+			try {
+				image = new Image("/img/BuffPic.png");
+			} catch (SlickException e) {
+				System.out.println("/img/BuffPic.png cannot be found");
+			}
+		}
+		else if(type == 2){
+			try {
+				image = new Image("/img/buffLive.png");
+			} catch (SlickException e) {
+				System.out.println("/img/buffLive.png cannot be found");
+			}
+			
 		}
 
 		//buff moves all the time by falling down
