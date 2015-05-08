@@ -14,6 +14,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Color;
 
 
+
 //Package "Basic Game" for 2D game development
 
 public class GameSpace extends BasicGame
@@ -45,7 +46,7 @@ public class GameSpace extends BasicGame
 
 	private Image level_0_NewGame, level_0_exit,
 	level_0_backgroundImg, level_1_backgroundImg, 
-	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg, BuffLive;
+	level_3_backgroundImg, level_4_backgroundImg, level_5_backgroundImg;
 	private Image [] brickTexture = new Image[3];
 	private Image[] secondsCountingImg = new Image[3];
 	
@@ -71,14 +72,14 @@ public class GameSpace extends BasicGame
 		
 		
 		//import images for main menu
-	
-		level_0_NewGame = new Image("/img/NewGame.png");
-		level_0_exit = new Image("/img/exit.png");
-		level_0_backgroundImg = new Image("/img/back.jpg");
-		level_1_backgroundImg = new Image("/img/back1.jpg");
-		level_3_backgroundImg = new Image("/img/ifPause.png");
-		level_4_backgroundImg = new Image("/img/ifLost.png");
-		level_5_backgroundImg = new Image("/img/ifWinner.png");
+		//InputStream stream = this.getClass().getClassLoader().getResourceAsStream("/im/NewGame.png");
+		level_0_NewGame = new Image("img/NewGame.png");
+		level_0_exit = new Image("img/exit.png");
+		level_0_backgroundImg = new Image("img/back.jpg");
+		level_1_backgroundImg = new Image("img/back1.jpg");
+		level_3_backgroundImg = new Image("img/ifPause.png");
+		level_4_backgroundImg = new Image("img/ifLost.png");
+		level_5_backgroundImg = new Image("img/ifWinner.png");
 		
 		
 		
@@ -89,7 +90,7 @@ public class GameSpace extends BasicGame
 		
 		//Assign textures for the brick types
 		for(int i = 0 ; i < brickTexture.length; i++)
-			brickTexture[i] = new Image("/img/"+"brick" + (brickTexture.length - i) + ".png");
+			brickTexture[i] = new Image("img/"+"brick" + (brickTexture.length - i) + ".png");
 		
 
 
@@ -103,8 +104,8 @@ public class GameSpace extends BasicGame
 	    		Ypos = spaceHeight - Mouse.getY();	
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
-	    		if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0));
-	    						//System.exit(0);
+	            else if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0) )
+	    						System.exit(0);
 	            
 	        }
 		
@@ -140,6 +141,7 @@ public class GameSpace extends BasicGame
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
         		if(ball.Collision(bricks[j])){
+        		
         		ifBuff = randInt(1,10);
         		ifBuffLive = randInt(1,30);
         		if(ifBuff==3){
@@ -251,6 +253,7 @@ public class GameSpace extends BasicGame
             	ball.Reset();
             	player.Reset();
             }
+    		
     		if (Xpos>600 && Xpos<1228 && Ypos>550 && Ypos<720 && mouseClicked(0)){
     			score.Reset();
     			level = 0;

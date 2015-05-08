@@ -19,16 +19,16 @@ public class Buff {
 		//type 2 -> for life-buff
 		if(type == 1){
 			try {
-				image = new Image("/img/BuffPic.png");
+				image = new Image("img/BuffPic.png");
 			} catch (SlickException e) {
-				System.out.println("/img/BuffPic.png cannot be found");
+				System.out.println("img/BuffPic.png cannot be found");
 			}
 		}
 		else if(type == 2){
 			try {
-				image = new Image("/img/buffLive.png");
+				image = new Image("img/buffLive.png");
 			} catch (SlickException e) {
-				System.out.println("/img/buffLive.png cannot be found");
+				System.out.println("img/buffLive.png cannot be found");
 			}
 			
 		}

@@ -25,17 +25,17 @@ public class Score {
 		//assign images for each score
 		for(int i = 0; i < scoreAllImg.length; i++)
 			try {
-				scoreAllImg[i] = new Image("/img/" + i + ".png");
+				scoreAllImg[i] = new Image("img/" + i + ".png");
 			} catch (SlickException e) {
-				System.out.println("/img/" + i + ".png cannot be found");
+				System.out.println("img/" + i + ".png cannot be found");
 			}
 
 
 		//assign image for the score word
 		try {
-			scoreWord = new Image("/img/ScoreWord.png");
+			scoreWord = new Image("img/ScoreWord.png");
 		} catch (SlickException e) {
-			System.out.println("/img/ScoreWord.png cannot be found");
+			System.out.println("img/ScoreWord.png cannot be found");
 		}
 
 

@@ -41,9 +41,9 @@ public class Player {
 		this.initialPosition = position;
 		
 		try {
-			playerImg = new Image("/img/PlayerSkin.png");
+			playerImg = new Image("img/PlayerSkin.png");
 		} catch (SlickException e) {
-			System.out.println("/img/PlayerSkin.png cannot be found");
+			System.out.println("img/PlayerSkin.png cannot be found");
 		}
 	}
 	
