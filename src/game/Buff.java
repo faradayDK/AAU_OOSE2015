@@ -14,17 +14,19 @@ public class Buff {
 		this.y = y;
 		this.width = 10;
 		collected = false;
+		//try to upload image of buff
 		try {
 			image = new Image("/img/BuffPic.png");
 		} catch (SlickException e) {
 			System.out.println("/img/BuffPic.png cannot be found");
 		}
 
-		
+		//buff moves all the time by falling down
 	}
 	public void moveBuff(){
 		y+=3;
 	}
+	//gets location of buff
 	public float GetX(){
 		return x;
 	}
@@ -34,7 +36,7 @@ public class Buff {
 	public float GetWidth(){
 		return width;
 	}
-	
+	//place to spawn buff
 	public void Spawn(float x, float y){
 		this.x = x;
 		this.y = y;
