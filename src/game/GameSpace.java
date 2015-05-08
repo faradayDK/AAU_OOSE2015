@@ -107,7 +107,7 @@ public class GameSpace extends BasicGame
 	    						//System.exit(0);
 	            
 	        }
-		
+		//
 		//the following code will be running if the level is equal to 1. (Game process)
 		if(level == 1){
 			
