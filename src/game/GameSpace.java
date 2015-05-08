@@ -20,7 +20,7 @@ public class GameSpace extends BasicGame
 {
 
 	//Global variables for bricks
-	int bricks_Amount = 3;
+	int bricks_Amount = 80;
 	int bricks_StartX = 100;
 	int bricks_StartY = 100;
 	//Call method that spawns the bricks in a grid
