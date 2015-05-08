@@ -27,3 +27,6 @@ The application is prototype of common known _*Breakout game*_. Player should co
 13. Now, you can start making your own game.
 14. Hey.
 
+***
+Aalborg University - Copenhagen , 2015
+
