@@ -33,8 +33,8 @@ public class GameSpace extends BasicGame
 	public Timer timer;
 	public Score score;
 	public Life life;
-	public Buff buff;
-	public BuffLive buffLive;
+	public Buff buff_Score;
+	public Buff buff_Live;
 	
 	//Setup for the screen size
 	public static int spaceHeight = 720;
@@ -65,8 +65,8 @@ public class GameSpace extends BasicGame
 		timer = new Timer(50,3);
 		score = new Score();
 		life = new Life();
-		buff = new Buff(1000,1000);
-		buffLive = new BuffLive(1000,1000);
+		buff_Score = new Buff(1000,1000, 1);
+		buff_Live = new Buff(1000,1000, 2);
 		
 		
 		
@@ -103,19 +103,20 @@ public class GameSpace extends BasicGame
 	    		Ypos = spaceHeight - Mouse.getY();	
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
+
 	    		if(Xpos>300 && Xpos<700 && Ypos>470 && Ypos<700 && mouseClicked(0) && level ==0){
 	    			
 	    						System.exit(0);
 	    			
-	            
+
 	        }
 		 }
 		
 		//the following code will be running if the level is equal to 1. (Game process)
 		if(level == 1){
 			
-			buff.moveBuff();
-			buffLive.moveBuff();
+			buff_Score.moveBuff();
+			buff_Live.moveBuff();
 			
 			//starts ball to move
 			ball.MoveBall();
@@ -150,11 +151,14 @@ public class GameSpace extends BasicGame
         		ifBuffLive = randInt(1,30);
         		//checks if one random number equals to 3, if so, spawn the buff on the position of brick which was collided by ball
         		if(ifBuff==3){
-        			buff.Spawn(bricks[j].GetX(), bricks[j].GetY());
+        			buff_Score.Spawn(bricks[j].GetX(), bricks[j].GetY());
         		}
+
         		//same code as with upper buff, just works for lifeBuff. here the probability is smaller then with scoreBuff
-        		if( ifBuffLive == 28 ) {
-        			buffLive.Spawn(bricks[j].GetX(),bricks[j].GetY());
+
+        		if( ifBuffLive == 28) {
+        			buff_Live.Spawn(bricks[j].GetX(),bricks[j].GetY());
+
         		}
         		//here, as collision was done, it reverts the ball(it flies oposite direction), score +1, deletes the brick
         		ball.fliesDown = !ball.fliesDown;
@@ -164,17 +168,17 @@ public class GameSpace extends BasicGame
         		}
         	}
         	//if player collects buff on score
-        	if (player.Collision(buff) && !buff.GetCollected()){
+        	if (player.Collision(buff_Score) && !buff_Score.GetCollected()){
         		
         		score.Add(100);
-        		buff.Collected();
+        		buff_Score.Collected();
         	}
         	
         	//if player collects buff on live
-        	if (player.Collision(buffLive) && !buffLive.GetCollected()){
+        	if (player.Collision(buff_Live) && !buff_Live.GetCollected()){
         		
         		life.AddLife();
-        		buffLive.Collected();
+        		buff_Live.Collected();
         	}
 
         	
@@ -336,8 +340,8 @@ public class GameSpace extends BasicGame
 			player.Display();
 			g.setColor(Color.white);
 			g.fillOval(ball.GetX(), ball.GetY(), 20,20);
-			buff.Display();
-			buffLive.Display();
+			buff_Score.Display();
+			buff_Live.Display();
 			
 		}
 		 
