@@ -103,10 +103,13 @@ public class GameSpace extends BasicGame
 	    		Ypos = spaceHeight - Mouse.getY();	
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
-	    		if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0));
+	    		if(Xpos>300 && Xpos<700 && Ypos>470 && Ypos<700 && mouseClicked(0) && level ==0){
+	    			
 	    						System.exit(0);
+	    			
 	            
 	        }
+		 }
 		
 		//the following code will be running if the level is equal to 1. (Game process)
 		if(level == 1){
@@ -128,7 +131,9 @@ public class GameSpace extends BasicGame
 			
 			//detects if there was a collision between player and ball, and if yes. calculates the angle for the ball
         	if(ball.Collision(player) ){
+        		//makes the ball fly in the opposite direction
         		ball.fliesDown = !ball.fliesDown;
+        		// when the key is pressed, the integer speed increases. it serves for calculating fphysics.
         		if (input.isKeyDown(Input.KEY_LEFT)){
         			ball.BallAngle1(player);
         		}
@@ -140,14 +145,18 @@ public class GameSpace extends BasicGame
         	//Collision with bricks
         	for(int j = 0 ; j < bricks.length ; j++){
         		if(ball.Collision(bricks[j])){
+        			//creates two random numbers no simulate some probability
         		ifBuff = randInt(1,10);
         		ifBuffLive = randInt(1,30);
+        		//checks if one random number equals to 3, if so, spawn the buff on the position of brick which was collided by ball
         		if(ifBuff==3){
         			buff.Spawn(bricks[j].GetX(), bricks[j].GetY());
         		}
+        		//same code as with upper buff, just works for lifeBuff. here the probability is smaller then with scoreBuff
         		if( ifBuffLive == 28 ) {
         			buffLive.Spawn(bricks[j].GetX(),bricks[j].GetY());
         		}
+        		//here, as collision was done, it reverts the ball(it flies oposite direction), score +1, deletes the brick
         		ball.fliesDown = !ball.fliesDown;
         		bricks[j].ReduceLife();
         		score.Add(1);
@@ -195,6 +204,7 @@ public class GameSpace extends BasicGame
             
             // if player exits the game, it refreshes, preparing the new one. it resets the ball, player, score, and so on.
     		if (Xpos>250 && Xpos<950 && Ypos>450 && Ypos<700 && mouseClicked(0)){
+    			
     			score.Reset();
     			level = 0;
             	life.Reset();
@@ -357,6 +367,8 @@ public class GameSpace extends BasicGame
 		 else if(level==3){
 			 level_0_backgroundImg.draw(0,0);
 			 level_3_backgroundImg.draw(0,0);
+			 
+			 
 			 
 		 }
 		 //this level will load up if player lost the game
