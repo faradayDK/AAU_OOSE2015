@@ -104,7 +104,7 @@ public class GameSpace extends BasicGame
 	            if(Xpos>250 && Xpos<950 && Ypos>100 && Ypos<300 && mouseClicked(0))
 	    				level = 1;			
 	    		if(Xpos>250 && Xpos<950 && Ypos>470 && Ypos<700 && mouseClicked(0));
-	    						System.exit(0);
+	    						//System.exit(0);
 	            
 	        }
 		
@@ -145,7 +145,7 @@ public class GameSpace extends BasicGame
         		if(ifBuff==3){
         			buff_Score.Spawn(bricks[j].GetX(), bricks[j].GetY());
         		}
-        		if( ifBuffLive == 28 ) {
+        		if( ifBuffLive == 28) {
         			buff_Live.Spawn(bricks[j].GetX(),bricks[j].GetY());
         		}
         		ball.fliesDown = !ball.fliesDown;
